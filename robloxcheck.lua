@@ -1,4 +1,4 @@
-spawn(function()
+task.spawn(function()
 if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
 
 _G.Delay_Upload = 300 -- โชว์ข้อมูลใหม่ทุกๆ 300วิ
@@ -21,6 +21,6 @@ _G.Race_Evo = {
 script_key="UPUXjqSkewmtoHSQzjwManHoPDEaPuAe";
 loadstring(game:HttpGet("https://raw.githubusercontent.com/londnee/code/main/m.lua"))()
 end)
-spawn(function()
+task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/chimnguu/ngu/master/bululachip.lua"))()
 end)
