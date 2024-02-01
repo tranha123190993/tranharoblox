@@ -1,6 +1,4 @@
 task.spawn(function()
-local RunService = game:GetService("RunService")
-RunService:Set3dRenderingEnabled(false)
 setfpscap(15)
 getgenv().Key = "MARU-NSAW-59OM5-3VWD-IHEPC-OLAL"
 getgenv().id = "1041690171508269166"
