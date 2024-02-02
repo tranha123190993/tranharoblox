@@ -1,6 +1,5 @@
 task.spawn(function()
-repeat task.wait() until game:IsLoaded()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/cangyeunhaudau/ditmemaychominhtriet/main/mankefarm.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
         end)
 task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/chimnguu/ngu/master/bululachip.lua"))()
