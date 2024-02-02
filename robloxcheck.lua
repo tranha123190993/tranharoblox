@@ -2,8 +2,8 @@ task.spawn(function()
 local RunService = game:GetService("RunService")
 RunService:Set3dRenderingEnabled(false)
 setfpscap(15)
-getgenv().Key = "MARU-82J4-4YRAQ-VKBN-N8LP3-LU9S"
-getgenv().id = "622118435924475905"
+getgenv().Key = "MARU-K84W-7TYCX-8PS4-Z64Z1-MAPM"
+getgenv().id = "452715592558968842"
 getgenv().Script_Mode = "Kaitun_Script"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
 end)
