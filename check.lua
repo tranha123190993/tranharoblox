@@ -8,6 +8,5 @@ getgenv().Script_Mode = "Kaitun_Script"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
 end)
 spawn(function()
-    getgenv().UserKey= "B601F0604AE6290B76DDC3EADBB02760"
-loadstring(game:HttpGet('https://api.chimovo.com/v1/hanei/script'))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/chimnguu/ngu/master/bululachip.lua"))()
 end)
