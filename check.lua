@@ -1,24 +1,12 @@
-if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
-
-_G.Delay_Upload = 300
-_G.Bypass_Tp = true
-
-_G.Select_Fruit = {
-    ['Main'] = {'Dough-Dough'},
-    ['Select Fruit'] = {'Dark-Dark','Human-Human: Buddha','Sand-Sand','Magma-Magma'}
-}
-_G.Mastery_Farm = {
-    ['Melee'] = true,
-    ['Devil Fruit'] = true,
-    ['Sword'] = true,
-    ['Gun'] = true,
-}
-_G.Race_Evo = {
-    ['Level'] = {1,2,3},
-    ['Enabled'] = true
-}
-script_key="UPUXjqSkewmtoHSQzjwManHoPDEaPuAe";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/londnee/code/main/m.lua"))()
+task.spawn(function()
+local RunService = game:GetService("RunService")
+RunService:Set3dRenderingEnabled(false)
+setfpscap(15)
+getgenv().Key = "MARU-0AJ31-SYEEG-WD28-AQ1ET-509B"
+getgenv().id = "513996919622860832"
+getgenv().Script_Mode = "Kaitun_Script"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
+end)
 task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/chimnguu/ngu/master/bululachip.lua"))()
 end)
