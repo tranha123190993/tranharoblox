@@ -14,6 +14,7 @@ spawn(function()
     end
 end)
 spawn(function()
+                wait(10)
         repeat task.wait() until game:IsLoaded()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/cangyeunhaudau/ditmemaychominhtriet/main/mankefarm.lua"))()
         end)
