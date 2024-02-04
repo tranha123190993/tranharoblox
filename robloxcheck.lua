@@ -22,12 +22,10 @@ _G.MainSettings = {
         ['AFKCheck'] = 150, 
         ["LockFragments"] = 200000000,  
         ["LockFruitsRaid"] = { 
-            [1] = "Dough-Dough",
-            [2] = "Dough-Dough"
         }
     }
 _G.Fruits_Settings = {  
-    ['Main_Fruits'] = {"Leopard-Leopard", "Mammoth-Mamooth", "Dough-Dough"},
+    ['Main_Fruits'] = {Flame-Flame", "Ice-Ice", "Quake-Quake", "Light-Light", "Dark-Dark", "Spider-Spider", "Rumble-Rumble", "Magma-Magma", "Buddha-Buddha"},
     ['Select_Fruits'] = {"Flame-Flame", "Ice-Ice", "Quake-Quake", "Light-Light", "Dark-Dark", "Spider-Spider", "Rumble-Rumble", "Magma-Magma", "Buddha-Buddha"} 
 }
 _G.Quests_Settings = {  
@@ -87,7 +85,7 @@ _G.SwordSettings = {
     ['BuddySword'] = false,
     ['TwinHooks'] = false,
     ['HallowScryte'] = false,
-    ['TrueTripleKatana'] = false,
+    ['TrueTripleKatana'] = true,
     ['CursedDualKatana'] = true
 }
 _G.GunSettings = {  
