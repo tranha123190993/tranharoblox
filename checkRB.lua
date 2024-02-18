@@ -1,4 +1,5 @@
 spawn(function()
+                task.wait(10)
         local RunService = game:GetService("RunService")
 RunService:Set3dRenderingEnabled(false)
 setfpscap(30)
