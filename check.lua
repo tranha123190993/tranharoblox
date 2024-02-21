@@ -1,10 +1,21 @@
+spawn(function()
+                task.wait(10)
+        local RunService = game:GetService("RunService")
+RunService:Set3dRenderingEnabled(false)
+setfpscap(30)
 getgenv().Key = "MARU-78T3-G54LS-1DH2-AHI95-NI09"
 getgenv().id = "513996919622860832"
 getgenv().Script_Mode = "Kaitun_Script"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
-task.spawn(function()
-        -- Variable to enable frame rate optimization features
-FrameRateBoost = true
+end)
+spawn(function()
+    wait(50)
+    if not game.CoreGui:FindFirstChild('NINONOOB') then
+        game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+    end
+end)
+spawn(function()
+                FrameRateBoost = true
 
 -- Function to lower texture quality and modify properties for performance optimization
 function TextureLow()
