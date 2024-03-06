@@ -99,7 +99,7 @@ task.spawn(function()
         game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId)
     end
 end)
-getgenv().Key = "MARU-AKL3-MNYWZ-17AR-7G2F2-N3G3"
+getgenv().Key = "MARU-L7ML-I7AM1-76R9-V2SF3-MO90"
 getgenv().id = "513996919622860832"
 getgenv().Script_Mode = "Kaitun_Script"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
