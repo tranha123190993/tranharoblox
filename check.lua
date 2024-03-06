@@ -1,6 +1,4 @@
-task.spawn(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/chimnguu/ngu/master/bululachip.lua"))()
-		repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game:IsLoaded()
 if not game:IsLoaded() then game:IsLoaded():Wait(5) end
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
@@ -95,7 +93,6 @@ w.DescendantAdded:Connect(function(v)
         v[v.ClassName.."Template"]=1
             end
         end)
-end)
 task.spawn(function()
     wait(80)
     if not game.CoreGui:FindFirstChild('NINONOOB') then
@@ -106,3 +103,6 @@ getgenv().Key = "MARU-78T3-G54LS-1DH2-AHI95-NI09"
 getgenv().id = "513996919622860832"
 getgenv().Script_Mode = "Kaitun_Script"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
+task.spawn(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/chimnguu/ngu/master/bululachip.lua"))()
+end)
