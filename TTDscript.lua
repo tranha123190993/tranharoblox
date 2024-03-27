@@ -1,13 +1,21 @@
 _G.key = "16b98eb5070e4c3da181c624407d3d89"
 loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
 local player = game.Players.LocalPlayer
+function checkMoneyValue()
+    if player and player.leaderstats and player.leaderstats:FindFirstChild("Money") then
+        return 1
+    else
+        return 0
+    end
+end
+
 setfpscap(15)
 spawn(function()
     while true do 
         local data = {}
         data['Basic Data'] = {}
         data['Basic Data']['Level'] = 2550
-        data['Basic Data']['Beli'] = 1
+        data['Basic Data']['Beli'] = checkMoneyValue()
         data['Basic Data']['Fragments'] = 1
         data['Basic Data']['DevilFruit'] = 0
         data['Basic Data']['Race'] = "TTD"
