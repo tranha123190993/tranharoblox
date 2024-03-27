@@ -1,6 +1,5 @@
-repeat wait()spawn(function()
-            _G.key = "16b98eb5070e4c3da181c624407d3d89"
-            loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()end)wait(10)until Joebiden
+_G.key = "16b98eb5070e4c3da181c624407d3d89"
+loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
 local player = game.Players.LocalPlayer
 setfpscap(15)
 spawn(function()
