@@ -1,4 +1,4 @@
--- getgenv().Key = "kac9a64099debbeea319c6d3"
+getgenv().Key = "kac9a64099debbeea319c6d3"
 loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
 local player = game.Players.LocalPlayer
 function checkMoneyValue()
