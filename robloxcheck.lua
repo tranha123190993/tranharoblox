@@ -1,104 +1,103 @@
-repeat task.wait() until game:IsLoaded()
-if not game:IsLoaded() then game:IsLoaded():Wait(5) end
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
-
-local WindowFocusReleasedFunction = function()
-	RunService:Set3dRenderingEnabled(false)
-	setfpscap(16)
-	return
-end
-
-local WindowFocusedFunction = function()
-	RunService:Set3dRenderingEnabled(true)
-	setfpscap(16)
-	return
-end
-
-local Initialize = function()
-	UserInputService.WindowFocusReleased:Connect(WindowFocusReleasedFunction)
-	UserInputService.WindowFocused:Connect(WindowFocusedFunction)
-	return
-end
-Initialize()
-UserSettings():GetService("UserGameSettings").MasterVolume = 0
-local decalsyeeted = true
-local g = game
-local w = g.Workspace
-local l = g.Lighting
-local t = w.Terrain
-sethiddenproperty(l,"Technology",2)
-sethiddenproperty(t,"Decoration",false)
-t.WaterWaveSize = 0
-t.WaterWaveSpeed = 0
-t.WaterReflectance = 0
-t.WaterTransparency = 0
-l.GlobalShadows = 0
-l.FogEnd = 9e9
-l.Brightness = 0
-settings().Rendering.QualityLevel = "Level01"
-for i, v in pairs(w:GetDescendants()) do
-    if v:IsA("BasePart") and not v:IsA("MeshPart") then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-    elseif (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
-        v.Transparency = 1
-    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-        v.Lifetime = NumberRange.new(0)
-    elseif v:IsA("Explosion") then
-        v.BlastPressure = 1
-        v.BlastRadius = 1
-    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
-        v.Enabled = false
-    elseif v:IsA("MeshPart") and decalsyeeted then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-        v.TextureID = 10385902758728957
-    elseif v:IsA("SpecialMesh") and decalsyeeted  then
-        v.TextureId=0
-    elseif v:IsA("ShirtGraphic") and decalsyeeted then
-        v.Graphic=1
-    elseif (v:IsA("Shirt") or v:IsA("Pants")) and decalsyeeted then
-        v[v.ClassName.."Template"]=1
-    end
-end
-for i = 1,#l:GetChildren() do
-    e=l:GetChildren()[i]
-    if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
-        e.Enabled = false
-    end
-end
-w.DescendantAdded:Connect(function(v)
-   if v:IsA("BasePart") and not v:IsA("MeshPart") then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-    elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-        v.Transparency = 1
-    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-        v.Lifetime = NumberRange.new(0)
-    elseif v:IsA("Explosion") then
-        v.BlastPressure = 1
-        v.BlastRadius = 1
-    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
-        v.Enabled = false
-    elseif v:IsA("MeshPart") and decalsyeeted then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-        v.TextureID = 10385902758728957
-    elseif v:IsA("SpecialMesh") and decalsyeeted then
-        v.TextureId=0
-    elseif v:IsA("ShirtGraphic") and decalsyeeted then
-        v.ShirtGraphic=1
-    elseif (v:IsA("Shirt") or v:IsA("Pants")) and decalsyeeted then
-        v[v.ClassName.."Template"]=1
-            end
-        end)
-task.spawn(function()
-    wait(80)
-    if not game.CoreGui:FindFirstChild('NINONOOB') then
-        game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId)
-    end
-end)
+_G.Team = "Pirate"
+_G.KAITUN_SCRIPT = true
+_G.LogsDes = {
+    ["Enabled"] = false, 
+    ["SendAlias"] = false, 
+    ["SendDescription"] = false,  
+    ["DelaySend"] = 5  
+}
+_G.WebHook = {
+    ["Enabled"] = false,  
+    ["Url"] = "",  
+    ["Delay"] = 60  
+}
+_G.MainSettings = {
+        ["EnabledHOP"] = true,  
+        ['FPSBOOST'] = true,  
+        ["FPSLOCKAMOUNT"] = 60, 
+        ['WhiteScreen'] = true,  
+        ['CloseUI'] = true,
+        ["NotifycationExPRemove"] = true,  
+        ['AFKCheck'] = 150, 
+        ["LockFragments"] = 200000000,  
+        ["LockFruitsRaid"] = { 
+            [1] = "",
+            [2] = ""
+        }
+    }
+_G.Fruits_Settings = {  
+    ['Main_Fruits'] = {""},
+    ['Select_Fruits'] = {"Flame-Flame", "Ice-Ice", "Quake-Quake", "Light-Light", "Dark-Dark", "Spider-Spider", "Rumble-Rumble", "Magma-Magma", "Buddha-Buddha"} 
+}
+_G.Quests_Settings = {  
+    ['Rainbow_Haki'] = true,
+    ["MusketeerHat"] = false,
+    ["PullLever"] = false,
+    ['DoughQuests_Mirror'] = {
+        ['Enabled'] = true,
+        ['UseFruits'] = true
+    }        
+}
+_G.Races_Settings = {  
+    ['Race'] = {
+        ['EnabledEvo'] = true,
+        ["v2"] = true,
+        ["v3"] = true,
+        ["Races_Lock"] = {
+            ["Races"] = { 
+                ["Mink"] = true,
+                ["Human"] = true,
+                ["Fishman"] = true
+            },
+            ["RerollsWhenFragments"] = 20000 
+        }
+    }
+}
+_G.Settings_Melee = {  
+    ['Superhuman'] = true,
+    ['DeathStep'] = true,
+    ['SharkmanKarate'] = true,
+    ['ElectricClaw'] = true,
+    ['DragonTalon'] = true,
+    ['Godhuman'] = true
+}
+_G.FarmMastery_Settings = {
+    ['Melee'] = true,
+    ['Sword'] = true,
+    ['DevilFruits'] = true,
+    ['Select_Swords'] = {
+        ["AutoSettings"] = true,  
+        ["ManualSettings"] = {  
+            "Saber",
+            "Buddy Sword"
+        }
+    }
+}
+_G.SwordSettings = { 
+    ['Saber'] = false,
+    ["Pole"] = false,
+    ['MidnightBlade'] = false,
+    ['Shisui'] = false,
+    ['Saddi'] = false,
+    ['Wando'] = false,
+    ['Yama'] = true,
+    ['Rengoku'] = false,
+    ['Canvander'] = false,
+    ['BuddySword'] = false,
+    ['TwinHooks'] = false,
+    ['HallowScryte'] = false,
+    ['TrueTripleKatana'] = false,
+    ['CursedDualKatana'] = true
+}
+_G.GunSettings = {  
+    ['Kabucha'] = true,
+    ['SerpentBow'] = true,
+    ['SoulGuitar'] = true
+}
+_G.FixBugLDArce = true
+_G.SharkAnchor_Settings = {
+    ["Enabled_Farm"] = true
+}
 getgenv().Key = "MARU-NC03-TVRRW-7ZFM-KBVH8-WRHR"
 getgenv().id = "513996919622860832"
 getgenv().Script_Mode = "Kaitun_Script"
