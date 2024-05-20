@@ -41,6 +41,8 @@ local function checkFightingStyle(boughtDataString)
     local style = ""
     if trueCount >= 3 and trueCount < 5 then
         style = "3-5"
+    elseid trueCount < 3 then
+        style = "0-2"
     elseif trueCount >= 5 then
         style = "God"
     end
