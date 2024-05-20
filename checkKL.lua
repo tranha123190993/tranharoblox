@@ -78,7 +78,7 @@ while true do
             Fragments = player.PlayerStats.Gem.Value,
             DevilFruit = accessoryInventory,
             Race = raceData or "Unknown",
-            FightingStyle = fightingStyle or "Unknown"
+            ['Fighting Style'] = fightingStyle or "Unknown"
         },
         ['Items Inventory'] = weaponInventory,
         ['Fruits Inventory'] = fruitInventory
