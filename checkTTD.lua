@@ -111,7 +111,7 @@ spawn(function()
             Level = 2550,
             Beli = checkMoneyValue(),
             Fragments = fragmentsValue or getCoins,
-            DevilFruit = "TTD"
+            DevilFruit = "TTD",
             Race = raceValue or getGems,
             ['Fighting Style'] = "TTD"
         }
