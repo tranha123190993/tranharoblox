@@ -19,6 +19,7 @@ local function writeDataToFile()
         warn("got error:", errorMessage)
     end
 end
+
 local function handleData(tbl)
     for k, v in pairs(tbl) do
         if type(v) == "table" then
@@ -40,13 +41,11 @@ local function handleData(tbl)
     end
 
     if flags.Coins and flags.Gems then
-    writeDataToFile()
-    flags.Coins = false
-    flags.Gems = false
+        writeDataToFile()
+        flags.Coins = false
+        flags.Gems = false
+    end
 end
-end
-
-
 
 dataRemoteEvent.OnClientEvent:Connect(handleData)
 
@@ -92,6 +91,7 @@ if promptOverlay then
 end
 
 setfpscap(15)
+
 spawn(function()
     while true do 
         teleportIfPlayAgainInvisible()
@@ -111,8 +111,8 @@ spawn(function()
             Level = 2550,
             Beli = checkMoneyValue(),
             Fragments = fragmentsValue or getCoins,
-            DevilFruit = "TTD",
             Race = raceValue or getGems,
+            DevilFruit = "TTD",
             ['Fighting Style'] = "TTD"
         }
 
