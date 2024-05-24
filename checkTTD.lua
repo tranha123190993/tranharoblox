@@ -3,6 +3,7 @@ local dataRemoteEvent = ReplicatedStorage:WaitForChild("dataRemoteEvent")
 local player = game.Players.LocalPlayer
 local data = {}
 local fragmentsValue, raceValue = nil, nil
+local gameID = 13775256536
 local flags = {
     Coins = false,
     Gems = false
@@ -84,7 +85,7 @@ local connection
 if promptOverlay then
     connection = promptOverlay.ChildAdded:Connect(function(child)
         if child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") and child.MessageArea:FindFirstChild("ErrorFrame") then
-            game:GetService("TeleportService"):Teleport(game.PlaceId)
+            game:GetService("TeleportService"):Teleport(gameID)
             connection:Disconnect()
         end
     end)
