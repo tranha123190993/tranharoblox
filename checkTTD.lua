@@ -69,7 +69,7 @@ local function teleportIfPlayAgainInvisible()
         if isGuiObjectVisible(matchFinishGui) then
             local playAgainFrame = matchFinishGui:FindFirstChild("MatchFinishFrame") and matchFinishGui.MatchFinishFrame:FindFirstChild("EndOptions") and matchFinishGui.MatchFinishFrame.EndOptions:FindFirstChild("PlayAgain")
             if playAgainFrame and not isGuiObjectVisible(playAgainFrame) then
-                game:GetService("TeleportService"):Teleport(game.PlaceId)
+                game:GetService("TeleportService"):Teleport(gameID)
             end
         else
             print("MatchFinish không hiển thị.")
