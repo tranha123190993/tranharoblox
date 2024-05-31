@@ -48,7 +48,7 @@ local function printSpecificValues(key, val)
             data["Basic Data"]["Fragments"] = val
         elseif key == "Gems" then
             data["Basic Data"] = data["Basic Data"] or {}
-            data["Basic Data"]["Race"] = val
+            data["Basic Data"]["Beli"] = val
         elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" or key == "Risky Dice" then
             data["Items Inventory"] = data["Items Inventory"] or {}
             data["Items Inventory"][key] = val
@@ -67,7 +67,7 @@ local function writeDataToFile()
     else
         print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
     end
-    data["Basic Data"]["Beli"] = beliValue
+    data["Basic Data"]["Race"] = beliValue
     data["Fruits Inventory"] = {""}
 
     local success, errorMessage = pcall(function()
