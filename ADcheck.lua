@@ -3,6 +3,7 @@ local getInventoryRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChil
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local gameID = 17017769292
+local player = Players.LocalPlayer
 local viewportFrame = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.ViewportFrame
 local worldModel = viewportFrame.WorldModel
 local promptOverlay = game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui") and game:GetService("CoreGui").RobloxPromptGui:FindFirstChild("promptOverlay")
@@ -19,7 +20,6 @@ end
 local data = {}
 
 local function checkMoneyValue()
-    local player = Players.LocalPlayer
     if player and player:FindFirstChild("leaderstats") and player.leaderstats:FindFirstChild("Yen") then
         return 1
     else
@@ -58,18 +58,17 @@ end
 
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
-    local player = Players.LocalPlayer
     local beliValue = checkMoneyValue()
     if beliValue == 0 and worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
     -- Lấy con đầu tiên trong WorldModel
     local firstChild = worldModel:GetChildren()[1]
     
-data["Fruits Inventory"] = firstChild.Name
-else
-    print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
-end
+        data["Basic Data"]["Fighting Style"] = firstChild.Name
+    else
+        print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
+    end
     data["Basic Data"]["Beli"] = beliValue
-    
+    data["Fruits Inventory"] = {""}
 
     local success, errorMessage = pcall(function()
         writefile(string.format("%sData.json", player.Name), jsonData)
@@ -106,6 +105,6 @@ spawn(function()
         else
             warn("Không thể nhận giá trị từ server: " .. tostring(value))
         end
-        wait(35)
+        wait(20)
     end
 end)
