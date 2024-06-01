@@ -79,7 +79,6 @@ local function writeDataToFile()
 
     if success then
         print(string.format("The file with name %sData.json has been written", player.Name))
-        print(jsonData)
     else
         warn("got error:", errorMessage)
     end
