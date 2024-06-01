@@ -59,7 +59,7 @@ end
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
     local beliValue = checkMoneyValue()
-    if beliValue == 0 and worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
+    if worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
     -- Lấy con đầu tiên trong WorldModel
     local firstChild = worldModel:GetChildren()[1]
     
