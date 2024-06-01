@@ -68,6 +68,9 @@ local function writeDataToFile()
         print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
     end
     data["Basic Data"]["Race"] = beliValue
+    if not data["Items Inventory"] then
+        data["Items Inventory"] = { ["Empty"] = "" }
+    end
     data["Fruits Inventory"] = {""}
 
     local success, errorMessage = pcall(function()
