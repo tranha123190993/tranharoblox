@@ -18,6 +18,7 @@ if promptOverlay then
         end
     end)
 end
+
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
     wait(0.2) 
@@ -29,7 +30,9 @@ local function SendCtrlKey()
     wait(0.1)
     VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
 end
+
 local data = {}
+local startTime = os.time() -- Lấy thời gian bắt đầu
 
 local function checkMoneyValue()
     if player and player:FindFirstChild("leaderstats") and player.leaderstats:FindFirstChild("Yen") then
@@ -60,7 +63,7 @@ local function printSpecificValues(key, val)
         elseif key == "Gems" then
             data["Basic Data"] = data["Basic Data"] or {}
             data["Basic Data"]["Beli"] = val
-        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" or key == "Risky Dice" then
+        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" hoặc key == "Risky Dice" then
             data["Items Inventory"] = data["Items Inventory"] or {}
             data["Items Inventory"][key] = val
         end
@@ -69,13 +72,14 @@ end
 
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
-    local beliValue = checkMoneyValue()
+    local currentTime = os.time() -- Lấy thời gian hiện tại
+    local elapsedTime = currentTime - startTime -- Thời gian đã trôi qua
+    local beliValue = elapsedTime >= 5 * 3600 and 0 or checkMoneyValue() -- Set belivalue = 0 sau 5 tiếng
+
     local viewportFrame = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.ViewportFrame
     local worldModel = viewportFrame.WorldModel
     if worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
-    -- Lấy con đầu tiên trong WorldModel
-    local firstChild = worldModel:GetChildren()[1]
-    
+        local firstChild = worldModel:GetChildren()[1]
         data["Basic Data"]["Fighting Style"] = firstChild.Name
         data["Basic Data"]["Cost"] = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.TowerCostFrame.CostLabel.Text
     else
@@ -130,13 +134,15 @@ spawn(function()
     else
         if not promptGui then
             warn("Không thể tìm thấy PromptGui trong PlayerGui")
-        elseif not promptDefault then
+        elseif not promptDefault thì
             warn("Không thể tìm thấy PromptDefault trong PromptGui")
-        elseif not button then
+        elseif not button thì
             warn("Không thể tìm thấy đối tượng button trong GUI")
         end
     end
+
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
+
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
