@@ -115,7 +115,7 @@ spawn(function()
     local oldUTC = os.time(os.date("!*t"))
     while true do
           if os.time(os.date("!*t")) - oldUTC >= 3600 then
-             TeleportService:Teleport(gameID)
+             game:GetService("TeleportService"):Teleport(gameID)
           end
         wait(20)
      end
