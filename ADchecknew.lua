@@ -113,10 +113,11 @@ local function printTable(tbl)
 end
 spawn(function()
     local oldUTC = os.time(os.date("!*t"))
-    while wait(20) do 
+    while true do
           if os.time(os.date("!*t")) - oldUTC >= 3600 then
              TeleportService:Teleport(gameID)
           end
+        wait(20)
      end
   end)
 spawn(function()
