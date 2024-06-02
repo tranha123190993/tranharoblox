@@ -4,6 +4,7 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local VirtualInputManager = game:GetService("VirtualInputManager")
+local TeleportService = game:GetService("TeleportService")
 local gameID = 17017769292
 local player = Players.LocalPlayer
 local Mouse = player:GetMouse()
@@ -13,7 +14,7 @@ local connection
 if promptOverlay then
     connection = promptOverlay.ChildAdded:Connect(function(child)
         if child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") and child.MessageArea:FindFirstChild("ErrorFrame") then
-            game:GetService("TeleportService"):Teleport(gameID)
+            TeleportService:Teleport(gameID)
             connection:Disconnect()
         end
     end)
@@ -21,7 +22,7 @@ end
 
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
-    wait(0.2) 
+    wait(0.2)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
 end
 
@@ -72,9 +73,6 @@ end
 
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
-    local currentTime = os.time() -- Lấy thời gian hiện tại
-    local elapsedTime = currentTime - startTime -- Thời gian đã trôi qua
-    local beliValue = elapsedTime >= 5 * 3600 and 0 or checkMoneyValue() -- Set belivalue = 0 sau 5 tiếng
 
     local viewportFrame = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.ViewportFrame
     local worldModel = viewportFrame.WorldModel
@@ -85,7 +83,7 @@ local function writeDataToFile()
     else
         print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
     end
-    data["Basic Data"]["Race"] = beliValue
+    data["Basic Data"]["Race"] = checkMoneyValue()
     if not data["Items Inventory"] then
         data["Items Inventory"] = { ["Empty"] = "" }
     end
@@ -144,6 +142,13 @@ spawn(function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
 
     while true do
+        local currentTime = os.time()
+        local elapsedTime = currentTime - startTime -- Thời gian đã trôi qua
+
+        if elapsedTime >= 5 * 3600 then
+            TeleportService:Teleport(gameID) -- Thực hiện Teleport nếu thời gian đã trôi qua 5 tiếng
+        end
+
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
             printTable(value)
