@@ -121,8 +121,8 @@ spawn(function()
      end
   end)
 spawn(function()
-    local promptGui = player.PlayerGui:WaitForChild("PromptGui", 3)
-    local promptDefault = promptGui and promptGui:WaitForChild("PromptDefault", 5) or nil
+    local promptGui = player.PlayerGui:WaitForChild("PromptGui", 10)
+    local promptDefault = promptGui and promptGui:WaitForChild("PromptDefault", 10) or nil
     local button = promptDefault and promptDefault.Holder.Options:WaitForChild("Summon!", 3) and promptDefault.Holder.Options["Summon!"].TextLabel or nil
 
     if promptGui and promptDefault and button then
