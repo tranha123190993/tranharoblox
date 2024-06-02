@@ -33,7 +33,6 @@ local function SendCtrlKey()
 end
 
 local data = {}
-local startTime = os.time() -- Lấy thời gian bắt đầu
 
 local function checkMoneyValue()
     if player and player:FindFirstChild("leaderstats") and player.leaderstats:FindFirstChild("Yen") then
@@ -113,7 +112,14 @@ local function printTable(tbl)
         end
     end
 end
-
+spawn(function()
+    local oldUTC = os.time(os.date("!*t"))
+    while wait(20) do 
+          if os.time(os.date("!*t")) - oldUTC >= 3600 then
+             TeleportService:Teleport(gameID)
+          end
+     end
+  end)
 spawn(function()
     local promptGui = player.PlayerGui:WaitForChild("PromptGui", 3)
     local promptDefault = promptGui and promptGui:WaitForChild("PromptDefault", 5) or nil
@@ -142,13 +148,6 @@ spawn(function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
 
     while true do
-        local currentTime = os.time()
-        local elapsedTime = currentTime - startTime -- Thời gian đã trôi qua
-
-        if elapsedTime >= 5 * 3600 then
-            TeleportService:Teleport(gameID) -- Thực hiện Teleport nếu thời gian đã trôi qua 5 tiếng
-        end
-
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
             printTable(value)
