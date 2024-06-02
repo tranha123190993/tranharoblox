@@ -4,7 +4,6 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local VirtualInputManager = game:GetService("VirtualInputManager")
-local TeleportService = game:GetService("TeleportService")
 local gameID = 17017769292
 local player = Players.LocalPlayer
 local Mouse = player:GetMouse()
@@ -14,15 +13,14 @@ local connection
 if promptOverlay then
     connection = promptOverlay.ChildAdded:Connect(function(child)
         if child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") and child.MessageArea:FindFirstChild("ErrorFrame") then
-            TeleportService:Teleport(gameID)
+            game:GetService("TeleportService"):Teleport(gameID)
             connection:Disconnect()
         end
     end)
 end
-
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
-    wait(0.2)
+    wait(0.2) 
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
 end
 
@@ -31,7 +29,6 @@ local function SendCtrlKey()
     wait(0.1)
     VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
 end
-
 local data = {}
 
 local function checkMoneyValue()
@@ -63,7 +60,7 @@ local function printSpecificValues(key, val)
         elseif key == "Gems" then
             data["Basic Data"] = data["Basic Data"] or {}
             data["Basic Data"]["Beli"] = val
-        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" hoặc key == "Risky Dice" then
+        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" or key == "Risky Dice" then
             data["Items Inventory"] = data["Items Inventory"] or {}
             data["Items Inventory"][key] = val
         end
@@ -72,17 +69,19 @@ end
 
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
-
+    local beliValue = checkMoneyValue()
     local viewportFrame = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.ViewportFrame
     local worldModel = viewportFrame.WorldModel
     if worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
-        local firstChild = worldModel:GetChildren()[1]
+    -- Lấy con đầu tiên trong WorldModel
+    local firstChild = worldModel:GetChildren()[1]
+    
         data["Basic Data"]["Fighting Style"] = firstChild.Name
         data["Basic Data"]["Cost"] = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.TowerCostFrame.CostLabel.Text
     else
         print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
     end
-    data["Basic Data"]["Race"] = checkMoneyValue()
+    data["Basic Data"]["Race"] = beliValue
     if not data["Items Inventory"] then
         data["Items Inventory"] = {""}
     end
@@ -126,6 +125,7 @@ spawn(function()
     local button = promptDefault and promptDefault.Holder.Options:WaitForChild("Summon!", 3) and promptDefault.Holder.Options["Summon!"].TextLabel or nil
 
     if promptGui and promptDefault and button then
+        -- Nếu tất cả đối tượng đều được tìm thấy, thực hiện các hành động nhấn nút
         local absolutePosition = button.AbsolutePosition
         local x, y = absolutePosition.X, absolutePosition.Y
         local absoluteSize = button.AbsoluteSize
@@ -138,15 +138,13 @@ spawn(function()
     else
         if not promptGui then
             warn("Không thể tìm thấy PromptGui trong PlayerGui")
-        elseif not promptDefault thì
+        elseif not promptDefault then
             warn("Không thể tìm thấy PromptDefault trong PromptGui")
-        elseif not button thì
+        elseif not button then
             warn("Không thể tìm thấy đối tượng button trong GUI")
         end
     end
-
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
-
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
@@ -158,3 +156,4 @@ spawn(function()
         wait(20)
     end
 end)
+
