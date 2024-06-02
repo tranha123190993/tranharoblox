@@ -85,7 +85,7 @@ local function writeDataToFile()
     end
     data["Basic Data"]["Race"] = checkMoneyValue()
     if not data["Items Inventory"] then
-        data["Items Inventory"] = { ["Empty"] = "" }
+        data["Items Inventory"] = {""}
     end
     data["Fruits Inventory"] = {""}
 
