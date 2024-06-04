@@ -1,5 +1,4 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local remotesFolder = ReplicatedStorage:WaitForChild("Remotes")
 local getInventoryRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("GetInventory")
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
@@ -8,24 +7,6 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local gameID = 17017769292
 local player = Players.LocalPlayer
 local Mouse = player:GetMouse()
-local codes = {
-            "MEMBEREREBREWRERES",
-            "sorry4delay",
-            "raidsarecool",
-            "thanks400k",
-            "dayum100m",
-            "wsindach4ht",
-            "200kholymoly",
-            "adontop",
-            "subcool",
-            "sub2toadboigaming",
-            "sub2mozking",
-            "sub2karizmaqt",
-            "sub2jonaslyz",
-            "sub2riktime",
-            "sub2nagblox",
-            "release2024"
-        }
 local promptOverlay = game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui") and game:GetService("CoreGui").RobloxPromptGui:FindFirstChild("promptOverlay")
 local connection
 
@@ -85,17 +66,6 @@ local function printSpecificValues(key, val)
         end
     end
 end
-local function useCode(code)
-    local success, result = pcall(function()
-        return useCodeRemote:InvokeServer(code)
-    end)
-
-    if success then
-        print("Result for code '" .. code .. "': " .. tostring(result))
-    else
-        warn("Failed to invoke server function for code '" .. code .. "': " .. tostring(result))
-    end
-end
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
     local beliValue = checkMoneyValue()
@@ -123,11 +93,8 @@ local function writeDataToFile()
     if success then
         print(string.format("The file with name %sData.json has been written", player.Name))
         if beliValue == 0 then
-        local useCodeRemote = remotesFolder:WaitForChild("UseCode")
-        for _, code in ipairs(codes) do
-            useCode(code)
+           loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/ADgiftcode.lua"))()                   
         end
-    end
     else
         warn("got error:", errorMessage)
     end
