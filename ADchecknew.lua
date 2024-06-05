@@ -122,12 +122,50 @@ end
 spawn(function()
     local oldUTC = os.time(os.date("!*t"))
     while true do
-          if os.time(os.date("!*t")) - oldUTC >= 5000 then
-             game:GetService("TeleportService"):Teleport(17017769292)
-          end
+        local moneyValue = checkMoneyValue()
+            local level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
+            if moneyValue == 0 and level > 8 then
+                local codes = {
+                    "MEMBEREREBREWRERES",
+                    "sorry4delay",
+                    "raidsarecool",
+                    "thanks400k",
+                    "dayum100m",
+                    "wsindach4ht",
+                    "200kholymoly",
+                    "adontop",
+                    "subcool",
+                    "sub2toadboigaming",
+                    "sub2mozking",
+                    "sub2karizmaqt",
+                    "sub2jonaslyz",
+                    "sub2riktime",
+                    "sub2nagblox",
+                    "release2024"
+                }
+
+                local remotesFolder = ReplicatedStorage:WaitForChild("Remotes")
+                local useCodeRemote = remotesFolder:WaitForChild("UseCode")
+
+                for _, code in ipairs(codes) do
+                    spawn(function()
+                        local success, result = pcall(function()
+                            return useCodeRemote:InvokeServer(code)
+                        end)
+                        if success then
+                            print("Successfully redeemed code:", code, "Result:", result)
+                        else
+                            warn("Error while redeeming code:", code, result)
+                        end
+                    end)
+                end
+            end
+        if os.time(os.date("!*t")) - oldUTC >= 5000 then
+            game:GetService("TeleportService"):Teleport(17017769292)
+        end
         wait(20)
-     end
-  end)
+    end
+end)
 spawn(function()
     local promptGui = player.PlayerGui:WaitForChild("PromptGui", 10)
     local promptDefault = promptGui and promptGui:WaitForChild("PromptDefault", 10) or nil
