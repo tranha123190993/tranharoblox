@@ -145,8 +145,8 @@ spawn(function()
                 "release2024"
             }
 
-            local remotesFolder = ReplicatedStorage:WaitForChild("Remotes")
-            local useCodeRemote = remotesFolder:WaitForChild("UseCode")
+            local remotesFolder = ReplicatedStorage:WaitForChild("Remotes", 5)
+            local useCodeRemote = remotesFolder:WaitForChild("UseCode", 5)
 
             for _, code in ipairs(codes) do
                 spawn(function()
