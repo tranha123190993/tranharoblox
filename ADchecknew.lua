@@ -98,7 +98,37 @@ local function writeDataToFile()
     if success then
         print(string.format("The file with name %sData.json has been written", player.Name))
         if beliValue == 0 and data["Basic Data"]["Level"] >= 8 then
-           loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/ADgiftcode.lua"))()                   
+           local codes = {
+    "MEMBEREREBREWRERES",
+    "sorry4delay",
+    "raidsarecool",
+    "thanks400k",
+    "dayum100m",
+    "wsindach4ht",
+    "200kholymoly",
+    "adontop",
+    "subcool",
+    "sub2toadboigaming",
+    "sub2mozking",
+    "sub2karizmaqt",
+    "sub2jonaslyz",
+    "sub2riktime",
+    "sub2nagblox",
+    "release2024"
+}
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local remotesFolder = replicatedStorage:WaitForChild("Remotes")
+local useCodeRemote = remotesFolder:WaitForChild("UseCode")
+local function useCode(code)
+    local success, result = pcall(function()
+        return useCodeRemote:InvokeServer(code)
+    end)
+end
+
+for _, code in ipairs(codes) do
+    useCode(code)
+end                
         end
     else
         warn("got error:", errorMessage)
