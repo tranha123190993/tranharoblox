@@ -32,13 +32,15 @@ end
 local data = {}
 
 local function checkMoneyValue()
-    if player and player:FindFirstChild("leaderstats") and player.leaderstats:FindFirstChild("Yen") then
+    local mapBorders = workspace:FindFirstChild("MapBorders")
+    if mapBorders then
         return 1
-    else
+    elseif workspace:FindFirstChild("Lobby") then
         return 0
+    else
+        return -1
     end
 end
-
 local function printSpecificValues(key, val)
     local specificKeys = {
         ["Trait Crystal"] = true,
