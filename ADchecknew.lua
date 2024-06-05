@@ -113,7 +113,8 @@ local function writeDataToFile()
     "sub2karizmaqt",
     "sub2jonaslyz",
     "sub2riktime",
-    "sub2nagblox"
+    "sub2nagblox",
+    "release2024"
 }
 
 local replicatedStorage = game:GetService("ReplicatedStorage")
