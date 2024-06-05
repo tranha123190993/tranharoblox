@@ -75,16 +75,18 @@ local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
     local beliValue = checkMoneyValue()
     local viewportFrame = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.ViewportFrame
-    local worldModel = viewportFrame.WorldModel
+    local worldModel = viewportFrame:WaitForChild("WorldModel")
+
     if worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
-    -- Lấy con đầu tiên trong WorldModel
-    local firstChild = worldModel:GetChildren()[1]
+        -- Lấy con đầu tiên trong WorldModel
+        local firstChild = worldModel:GetChildren()[1]
     
         data["Basic Data"]["Fighting Style"] = firstChild.Name
         data["Basic Data"]["Cost"] = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.TowerCostFrame.CostLabel.Text
     else
         print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
     end
+
     data["Basic Data"]["Race"] = beliValue
     if not data["Items Inventory"] then
         data["Items Inventory"] = {""}
