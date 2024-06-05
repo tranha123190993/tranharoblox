@@ -20,18 +20,8 @@ local codes = {
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local remotesFolder = replicatedStorage:WaitForChild("Remotes")
 local useCodeRemote = remotesFolder:WaitForChild("UseCode")
-local function useCode(code)
+for _, code in ipairs(codes) do
     local success, result = pcall(function()
         return useCodeRemote:InvokeServer(code)
     end)
-
-    if success then
-        print("Result for code '" .. code .. "': " .. tostring(result))
-    else
-        warn("Failed to invoke server function for code '" .. code .. "': " .. tostring(result))
-    end
-end
-
-for _, code in ipairs(codes) do
-    useCode(code)
-end
+end                
