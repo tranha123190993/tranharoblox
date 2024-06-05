@@ -97,7 +97,7 @@ local function writeDataToFile()
 
     if success then
         print(string.format("The file with name %sData.json has been written", player.Name))
-        if beliValue == 0 then
+        if beliValue == 0 and data["Basic Data"]["Level"] >=8 then
            loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/ADgiftcode.lua"))()                   
         end
     else
