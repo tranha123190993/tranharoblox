@@ -60,11 +60,12 @@ local function printSpecificValues(key, val)
             data["Basic Data"]["Level"] = val
         elseif key == "Gold" then
             data["Basic Data"] = data["Basic Data"] or {}
-            data["Basic Data"]["Fragments"] = val
+            data["Basic Data"]["Gold"] = val
         elseif key == "Gems" then
             data["Basic Data"] = data["Basic Data"] or {}
-            data["Basic Data"]["Beli"] = val
-        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" or key == "Risky Dice" then
+            data["Basic Data"]["Gems"] = val
+        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" or key == "Risky Dice" or
+               key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
             data["Items Inventory"] = data["Items Inventory"] or {}
             data["Items Inventory"][key] = val
         end
@@ -164,4 +165,3 @@ spawn(function()
         wait(10)
     end
 end)
-
