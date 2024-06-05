@@ -26,7 +26,9 @@ for _, code in ipairs(codes) do
         local success, result = pcall(function()
             return useCodeRemote:InvokeServer(code)
         end)
-        if not success then
+        if success then
+            print("Successfully redeemed code:", code, "Result:", result)
+        else
             warn("Error while redeeming code:", code, result)
         end
     end)
