@@ -97,9 +97,6 @@ local function writeDataToFile()
 
     local success, errorMessage = pcall(function()
         writefile(string.format("%sData.json", player.Name), jsonData)
-            if beliValue == 0 then
-           loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/ADgiftcode.lua"))()
-        end
     end)
 
     if success then
