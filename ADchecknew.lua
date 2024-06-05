@@ -152,6 +152,7 @@ spawn(function()
             warn("Không thể tìm thấy đối tượng button trong GUI")
         end
     end
+        wait(10)
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ChangeSetting"):FireServer("Skills Enabled", false)
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
     while true do
