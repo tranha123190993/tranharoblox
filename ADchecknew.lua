@@ -43,6 +43,10 @@ local function printSpecificValues(key, val)
     local specificKeys = {
         ["Trait Crystal"] = true,
         ["Energy Crystal"] = true,
+        ["Star Rift (Red)"] = true,
+        ["Star Rift (Blue)"] = true,
+        ["Star Rift (Yellow)"] = true,
+        ["Star Rift (Green)"] = true,
         ["Meat"] = true,
         ["Risky Dice"] = true,
         ["Level"] = true,
