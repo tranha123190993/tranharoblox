@@ -30,12 +30,13 @@ local function SendCtrlKey()
     VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
 end
 local data = {}
-
 local function checkMoneyValue()
     local mapBorders = workspace:FindFirstChild("MapBorders")
     if mapBorders then
         return 1
     elseif workspace:FindFirstChild("Lobby") then
+        return 0
+    elseif workspace:FindFirstChild("TradingLobby") then
         return 0
     else
         return -1
