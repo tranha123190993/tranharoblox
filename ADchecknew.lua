@@ -120,14 +120,10 @@ local function writeDataToFile()
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local remotesFolder = replicatedStorage:WaitForChild("Remotes")
 local useCodeRemote = remotesFolder:WaitForChild("UseCode")
-local function useCode(code)
+for _, code in ipairs(codes) do
     local success, result = pcall(function()
         return useCodeRemote:InvokeServer(code)
     end)
-end
-
-for _, code in ipairs(codes) do
-    useCode(code)
 end                
         end
     else
