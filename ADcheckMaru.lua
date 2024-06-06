@@ -154,6 +154,8 @@ spawn(function()
 end)
 spawn(function()
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ChangeSetting"):FireServer("Skills Enabled", false)
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ChangeSetting"):FireServer("Low Quality", true)
+
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
