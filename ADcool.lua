@@ -207,7 +207,7 @@ spawn(function()
             local absolutePosition = textLabel.AbsolutePosition
             local x, y = absolutePosition.X, absolutePosition.Y
             local absoluteSize = textLabel.AbsoluteSize
-            local centerX, centerY = x + absoluteSize.X / 2, y + absoluteSize.Y / 2 + 30
+            local centerX, centerY = x + absoluteSize.X / 2 - 20, y + absoluteSize.Y / 2 + 30
             ClickAtPosition(centerX, centerY)
             wait(0,2)
             unitPage.Visible = false
