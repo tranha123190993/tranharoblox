@@ -182,12 +182,15 @@ spawn(function()
 
     if promptGui and promptDefault and button then
         ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("FirstTimeSummon"):InvokeServer()
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 2)
+            wait(1)
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 1)
+            wait(1)
+        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 1)
+            wait(1)
         TeleportService:Teleport(17017769292)
         local playerGui = player:WaitForChild("PlayerGui")
         local pages = playerGui:WaitForChild("PAGES")
         local unitPage = pages:WaitForChild("UnitPage")
-
         unitPage.Visible = true
         wait(2)
 
