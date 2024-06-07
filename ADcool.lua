@@ -22,7 +22,7 @@ end
 
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
-    wait(0.2) 
+    wait(0.2)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
 end
 
@@ -176,21 +176,23 @@ spawn(function()
 end)
 
 spawn(function()
-    local promptGui = player.PlayerGui:WaitForChild("PromptGui", 10)
-    local promptDefault = promptGui and promptGui:WaitForChild("PromptDefault", 10) or nil
-    local button = promptDefault and promptDefault.Holder.Options:WaitForChild("Summon!", 3) and promptDefault.Holder.Options["Summon!"].TextLabel or nil
+    local moneyValue = checkMoneyValue()
+    if moneyValue == 0 then
+        local promptGui = player.PlayerGui:WaitForChild("PromptGui", 10)
+        local promptDefault = promptGui and promptGui:WaitForChild("PromptDefault", 10) or nil
+        local button = promptDefault and promptDefault.Holder.Options:WaitForChild("Summon!", 3) and promptDefault.Holder.Options["Summon!"].TextLabel or nil
 
-    if promptGui and promptDefault and button then
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("FirstTimeSummon"):InvokeServer()
+        if promptGui and promptDefault and button then
+            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("FirstTimeSummon"):InvokeServer()
             wait(1)
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 1)
+            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 1)
             wait(1)
-        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 1)
+            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 1)
             wait(1)
-        TeleportService:Teleport(17017769292)
-        
-    end
-    local playerGui = player:WaitForChild("PlayerGui")
+            TeleportService:Teleport(gameID)
+        end
+
+        local playerGui = player:WaitForChild("PlayerGui")
         local pages = playerGui:WaitForChild("PAGES")
         local unitPage = pages:WaitForChild("UnitPage")
         unitPage.Visible = true
@@ -209,11 +211,13 @@ spawn(function()
             local absoluteSize = textLabel.AbsoluteSize
             local centerX, centerY = x + absoluteSize.X / 2 - 20, y + absoluteSize.Y / 2 + 30
             ClickAtPosition(centerX, centerY)
-            wait(0,2)
+            wait(0.2)
             unitPage.Visible = false
             print("Clicked on EquipBestButton's TextLabel")
         end
-    loadstring(game:HttpGet("https://nousigi.com/loader.lua"))() 
+    end
+
+    loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
 
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
