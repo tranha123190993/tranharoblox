@@ -188,7 +188,9 @@ spawn(function()
         ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Summon"):InvokeServer("Standard", 1)
             wait(1)
         TeleportService:Teleport(17017769292)
-        local playerGui = player:WaitForChild("PlayerGui")
+        
+    end
+    local playerGui = player:WaitForChild("PlayerGui")
         local pages = playerGui:WaitForChild("PAGES")
         local unitPage = pages:WaitForChild("UnitPage")
         unitPage.Visible = true
@@ -211,8 +213,6 @@ spawn(function()
             unitPage.Visible = false
             print("Clicked on EquipBestButton's TextLabel")
         end
-    end
-
     loadstring(game:HttpGet("https://nousigi.com/loader.lua"))() 
 
     while true do
