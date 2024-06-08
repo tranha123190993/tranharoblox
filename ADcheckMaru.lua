@@ -166,7 +166,9 @@ end)
 spawn(function()
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ChangeSetting"):FireServer("Skills Enabled", false)
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ChangeSetting"):FireServer("Low Quality", true)
-
+    getgenv().Key = "MARU-MWYO-MIAEH-KG6R-ZZB6B-YMM7"
+    getgenv().id = "513996919622860832"
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
