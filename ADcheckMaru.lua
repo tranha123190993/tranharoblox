@@ -77,6 +77,7 @@ local function writeDataToFile()
 
     local success, errorMessage = pcall(function()
         writefile(string.format("%sData.json", player.Name), jsonData)
+        print(jsonData)
     end)
 
     if success then
