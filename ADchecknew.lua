@@ -132,6 +132,7 @@ spawn(function()
                 "sorry4delay",
                 "raidsarecool",
                 "thanks400k",
+                "thanks500k",
                 "dayum100m",
                 "wsindach4ht",
                 "200kholymoly",
