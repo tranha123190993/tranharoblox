@@ -105,11 +105,15 @@ local function printTable(tbl)
                     data["Basic Data"] = data["Basic Data"] or {}
                     data["Basic Data"]["Fighting Style"] = fightingStyles  -- Lưu trữ chuỗi fighting styles vào data
                 end
+            else
+                printSpecificValues(key, val)
+            end
         else
             printSpecificValues(key, val)
         end
     end
 end
+
 
 spawn(function()
     while true do
