@@ -121,6 +121,11 @@ local function printTable(tbl)
 end
 local function clickReplayButton()
     local matchResultPage = player.PlayerGui.PAGES.MatchResultPage
+    local backToLobbyButton = matchResultPage.Main.Options:FindFirstChild("BackToLobbyButton")
+        if backToLobbyButton then
+            backToLobbyButton.Active = false
+            backToLobbyButton.Visible = false
+        end
     if matchResultPage and matchResultPage.Visible then
         local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
         if replayButton and replayButton:IsA("ImageButton") then
@@ -154,6 +159,8 @@ spawn(function()
             end
         end)
     elseif moneyValue == 0 and level >= 2 then
+        repeat wait() until game:IsLoaded()
+        wait(5)
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
     else
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
