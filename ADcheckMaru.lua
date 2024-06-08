@@ -81,7 +81,6 @@ local function writeDataToFile()
 
     local success, errorMessage = pcall(function()
         writefile(string.format("%sData.json", player.Name), jsonData)
-        print(jsonData)
     end)
 
     if success then
@@ -135,8 +134,6 @@ local function clickReplayButton()
         else
             print("ReplayButton not found.")
         end
-    else
-        print("UI or button not found or button is not an ImageButton.")
     end
 end
 
