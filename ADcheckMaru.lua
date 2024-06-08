@@ -90,17 +90,21 @@ local function printTable(tbl)
             if key == "Level" or key == "Currencies" or key == "Items" then
                 printTable(val)
             elseif key == "Units" then
-                data["Basic Data"] = data["Basic Data"] or {}
-                data["Basic Data"]["Fighting Style"] = {} -- Khởi tạo danh sách chuỗi
+                local fightingStyles = ""  -- Khởi tạo chuỗi để lưu trữ các fighting styles
 
                 for _, unitTable in pairs(val) do
                     if unitTable.Type then
-                        table.insert(data["Basic Data"]["Fighting Style"], unitTable.Type) -- Thêm giá trị "Type" vào danh sách
+                        if fightingStyles ~= "" then
+                            fightingStyles = fightingStyles .. ", "  -- Thêm dấu phân cách nếu cần
+                        end
+                        fightingStyles = fightingStyles .. unitTable.Type  -- Thêm giá trị "Type" vào chuỗi
                     end
                 end
-            else
-                printSpecificValues(key, val)
-            end
+
+                if fightingStyles ~= "" then
+                    data["Basic Data"] = data["Basic Data"] or {}
+                    data["Basic Data"]["Fighting Style"] = fightingStyles  -- Lưu trữ chuỗi fighting styles vào data
+                end
         else
             printSpecificValues(key, val)
         end
