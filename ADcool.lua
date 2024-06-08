@@ -192,29 +192,30 @@ spawn(function()
             TeleportService:Teleport(gameID)
         end
 
-        local playerGui = player:WaitForChild("PlayerGui")
-        local pages = playerGui:WaitForChild("PAGES")
-        local unitPage = pages:WaitForChild("UnitPage")
-        unitPage.Visible = true
-        wait(2)
+        local Players = game:GetService("Players")
+        local VirtualInputManager = game:GetService("VirtualInputManager")
+        local player = Players.LocalPlayer
 
-        print("UnitPage.Visible has been set to true")
+        local ui = player.PlayerGui.PAGES.UnitPage
+        local button = ui.BottomHolder.EquipBestHolder:FindFirstChild("EquipBestButton")
 
-        local bottomHolder = unitPage:WaitForChild("BottomHolder")
-        local equipBestHolder = bottomHolder:WaitForChild("EquipBestHolder")
-        local equipBestButton = equipBestHolder:WaitForChild("EquipBestButton")
-        local textLabel = equipBestButton:WaitForChild("TextLabel")
+        if ui and button and button:IsA("GuiButton") then
+            local originalUIVisibility = ui.Visible
+            ui.Visible = true
+            game:GetService("RunService").Heartbeat:Wait()
+            local absPos = button.AbsolutePosition
+            local absSize = button.AbsoluteSize
+            local x, y = absPos.X, absPos.Y
+            local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
 
-        if playerGui and unitPage and bottomHolder and equipBestHolder and equipBestButton and textLabel then
-            local absolutePosition = textLabel.AbsolutePosition
-            local x, y = absolutePosition.X, absolutePosition.Y
-            local absoluteSize = textLabel.AbsoluteSize
-            local centerX, centerY = x + absoluteSize.X / 2 - 20, y + absoluteSize.Y / 2 + 30
             ClickAtPosition(centerX, centerY)
-            wait(0.2)
-            unitPage.Visible = false
-            print("Clicked on EquipBestButton's TextLabel")
-        end
+            ui.Visible = originalUIVisibility
+
+    print("Button clicked.")
+else
+    print("UI or button not found or button is not a GuiButton.")
+end
+
     end
 
     loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
