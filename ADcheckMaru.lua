@@ -96,7 +96,6 @@ local function printTable(tbl)
                         table.insert(data["Basic Data"]["Fighting Style"], unitTable.Type)
                     end
                 end
-            end
             else
                 printSpecificValues(key, val)
             end
