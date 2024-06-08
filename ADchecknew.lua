@@ -126,7 +126,7 @@ spawn(function()
         local moneyValue = checkMoneyValue()
         local level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
         print("Checking conditions... MoneyValue:", moneyValue, "Level:", level)  -- Thêm dòng này để debug
-        if moneyValue == 0 and level > 8 then
+        if moneyValue == 0 and level >= 8 then
             local codes = {
                 "MEMBEREREBREWRERES",
                 "sorry4delay",
