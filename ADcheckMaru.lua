@@ -38,7 +38,7 @@ local function printSpecificValues(key, val)
         ["Star Rift (Blue)"] = true,
         ["Star Rift (Yellow)"] = true,
         ["Star Rift (Green)"] = true,
-        ["Meat"] = true,
+        ["Frost Bind"] = true,
         ["Risky Dice"] = true,
         ["Level"] = true,
         ["Gold"] = true,
@@ -55,7 +55,7 @@ local function printSpecificValues(key, val)
         elseif key == "Gems" then
             data["Basic Data"] = data["Basic Data"] or {}
             data["Basic Data"]["Beli"] = val
-        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Meat" or key == "Risky Dice" or
+        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Frost Bind" or key == "Risky Dice" or
                key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
             data["Items Inventory"] = data["Items Inventory"] or {}
             data["Items Inventory"][key] = val
