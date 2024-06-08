@@ -89,10 +89,12 @@ local function printTable(tbl)
             if key == "Level" or key == "Currencies" or key == "Items" then
                 printTable(val)
             elseif key == "Units" then
+                data["Basic Data"] = data["Basic Data"] or {}
+                data["Basic Data"]["Fighting Style"] = {}
                 for _, unitTable in pairs(val) do
-                if unitTable.Type then
-                    data["Basic Data"] = data["Basic Data"] or {}
-                    data["Basic Data"]["Fighting Style"] = unitTable.Type
+                    if unitTable.Type then
+                        table.insert(data["Basic Data"]["Fighting Style"], unitTable.Type)
+                    end
                 end
             end
             else
