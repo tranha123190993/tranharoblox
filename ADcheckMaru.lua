@@ -57,11 +57,17 @@ local function printSpecificValues(key, val)
             data["Basic Data"]["Beli"] = val
         elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Frost Bind" or key == "Risky Dice" or
                key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
-            data["Items Inventory"] = data["Items Inventory"] or {}
-            data["Items Inventory"][key] = val
+            data["Items Inventory"] = data["Items Inventory"] or ""
+
+            if data["Items Inventory"] ~= "" then
+                data["Items Inventory"] = data["Items Inventory"] .. ", " .. key
+            else
+                data["Items Inventory"] = key
+            end
         end
     end
 end
+
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
     local beliValue = checkMoneyValue()
@@ -89,12 +95,20 @@ local function printTable(tbl)
             if key == "Level" or key == "Currencies" or key == "Items" then
                 printTable(val)
             elseif key == "Units" then
-                data["Basic Data"] = data["Basic Data"] or {}
-                data["Basic Data"]["Fighting Style"] = {}
+                local fightingStyles = "" 
+
                 for _, unitTable in pairs(val) do
                     if unitTable.Type then
-                        table.insert(data["Basic Data"]["Fighting Style"], unitTable.Type)
+                        if fightingStyles ~= "" then
+                            fightingStyles = fightingStyles .. ", " 
+                        end
+                        fightingStyles = fightingStyles .. unitTable.Type
                     end
+                end
+
+                if fightingStyles ~= "" then
+                    data["Basic Data"] = data["Basic Data"] or {}
+                    data["Basic Data"]["Fighting Style"] = fightingStyles
                 end
             else
                 printSpecificValues(key, val)
@@ -104,6 +118,7 @@ local function printTable(tbl)
         end
     end
 end
+
 spawn(function()
     while true do
         local moneyValue = checkMoneyValue()
