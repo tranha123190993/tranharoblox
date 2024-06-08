@@ -151,7 +151,7 @@ spawn(function()
                 wait(1)
             end
         end)
-    elseif moneyValue == 0 and level > 1 then
+    elseif moneyValue == 0 and level >= 2 then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
     else
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
