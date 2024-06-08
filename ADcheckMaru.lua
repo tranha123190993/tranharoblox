@@ -139,7 +139,12 @@ end
 
 spawn(function()
     local moneyValue = checkMoneyValue()
-    local level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
+    local level
+    repeat
+        level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
+        wait(2)
+    until level ~= 0
+
     if moneyValue == 0 and level == 1 then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
         spawn(function()
@@ -160,6 +165,7 @@ spawn(function()
         end)
     end
 end)
+
 
 spawn(function()
     while true do
