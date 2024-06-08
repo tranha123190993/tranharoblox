@@ -42,7 +42,8 @@ local function printSpecificValues(key, val)
         ["Risky Dice"] = true,
         ["Level"] = true,
         ["Gold"] = true,
-        ["Gems"] = true
+        ["Gems"] = true,
+        ["Type"] = true
     }
 
     if specificKeys[key] then
@@ -55,6 +56,9 @@ local function printSpecificValues(key, val)
         elseif key == "Gems" then
             data["Basic Data"] = data["Basic Data"] or {}
             data["Basic Data"]["Beli"] = val
+        elseif key == "Type" then
+            data["Basic Data"] = data["Basic Data"] or {}
+            data["Basic Data"]["Fighting Style"] = val
         elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Frost Bind" or key == "Risky Dice" or
                key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
             data["Items Inventory"] = data["Items Inventory"] or {}
@@ -65,19 +69,6 @@ end
 local function writeDataToFile()
     local jsonData = HttpService:JSONEncode(data)
     local beliValue = checkMoneyValue()
-    local viewportFrame = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.ViewportFrame
-    local worldModel = viewportFrame:WaitForChild("WorldModel")
-
-    if worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
-        -- Lấy con đầu tiên trong WorldModel
-        local firstChild = worldModel:GetChildren()[1]
-    
-        data["Basic Data"]["Fighting Style"] = firstChild.Name
-        data["Basic Data"]["Cost"] = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.TowerCostFrame.CostLabel.Text
-    else
-        print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
-    end
-
     data["Basic Data"]["Race"] = beliValue
     if not data["Items Inventory"] then
         data["Items Inventory"] = {""}
@@ -98,7 +89,7 @@ end
 local function printTable(tbl)
     for key, val in pairs(tbl) do
         if type(val) == "table" then
-            if key == "Level" or key == "Currencies" or key == "Items" then
+            if key == "Level" or key == "Currencies" or key == "Items" or key == "Units" then
                 printTable(val)
             else
                 printSpecificValues(key, val)
