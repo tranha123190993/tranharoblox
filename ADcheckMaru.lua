@@ -154,7 +154,7 @@ spawn(function()
     elseif moneyValue == 0 and level > 1 then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
     else
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
         spawn(function()
             while true do
                 clickReplayButton()
