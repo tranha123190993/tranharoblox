@@ -42,8 +42,7 @@ local function printSpecificValues(key, val)
         ["Risky Dice"] = true,
         ["Level"] = true,
         ["Gold"] = true,
-        ["Gems"] = true,
-        ["Type"] = true
+        ["Gems"] = true
     }
 
     if specificKeys[key] then
@@ -56,9 +55,6 @@ local function printSpecificValues(key, val)
         elseif key == "Gems" then
             data["Basic Data"] = data["Basic Data"] or {}
             data["Basic Data"]["Beli"] = val
-        elseif key == "Type" then
-            data["Basic Data"] = data["Basic Data"] or {}
-            data["Basic Data"]["Fighting Style"] = val
         elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Frost Bind" or key == "Risky Dice" or
                key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
             data["Items Inventory"] = data["Items Inventory"] or {}
@@ -90,8 +86,15 @@ end
 local function printTable(tbl)
     for key, val in pairs(tbl) do
         if type(val) == "table" then
-            if key == "Level" or key == "Currencies" or key == "Items" or key == "Units" then
+            if key == "Level" or key == "Currencies" or key == "Items" then
                 printTable(val)
+            elseif key == "Units" then
+                for _, unitTable in pairs(val) do
+                if unitTable.Type then
+                    data["Basic Data"] = data["Basic Data"] or {}
+                    data["Basic Data"]["Fighting Style"] = unitTable.Type
+                end
+            end
             else
                 printSpecificValues(key, val)
             end
