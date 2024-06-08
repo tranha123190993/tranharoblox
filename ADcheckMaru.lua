@@ -129,7 +129,7 @@ local function clickReplayButton()
             local x, y = absPos.X, absPos.Y
             local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
             VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, true, game, 1)
-            wait(0.2) 
+            wait(0.1) 
             VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, false, game, 1)
         else
             print("ReplayButton not found.")
@@ -150,7 +150,7 @@ spawn(function()
         spawn(function()
             while true do
                 clickReplayButton()
-                wait(1)
+                wait(0.1)
             end
         end)
     elseif moneyValue == 0 and level >= 2 then
@@ -160,7 +160,7 @@ spawn(function()
         spawn(function()
             while true do
                 clickReplayButton()
-                wait(1)
+                wait(0.1)
             end
         end)
     end
