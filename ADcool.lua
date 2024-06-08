@@ -192,10 +192,6 @@ spawn(function()
             TeleportService:Teleport(gameID)
         end
 
-        local Players = game:GetService("Players")
-        local VirtualInputManager = game:GetService("VirtualInputManager")
-        local player = Players.LocalPlayer
-
         local ui = player.PlayerGui.PAGES.UnitPage
         local button = ui.BottomHolder.EquipBestHolder:FindFirstChild("EquipBestButton")
 
