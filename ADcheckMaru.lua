@@ -3,8 +3,11 @@ local getInventoryRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChil
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local TeleportService = game:GetService("TeleportService")
 local gameID = 17017769292
 local player = Players.LocalPlayer
+local Mouse = player:GetMouse()
 local promptOverlay = game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui") and game:GetService("CoreGui").RobloxPromptGui:FindFirstChild("promptOverlay")
 local connection
 
@@ -16,7 +19,11 @@ if promptOverlay then
         end
     end)
 end
-
+local function ClickAtPosition(x, y)
+    VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
+    wait(0.2)
+    VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
+end
 local data = {}
 local function checkMoneyValue()
     local mapBorders = workspace:FindFirstChild("MapBorders")
@@ -113,8 +120,57 @@ local function printTable(tbl)
         end
     end
 end
+spawn(function()
+    local moneyValue = checkMoneyValue()
+    local level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
+    if moneyValue == 0 and level == 1 then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+        spawn(function()
+    while true do
+    local matchResultPage = player.PlayerGui.PAGES.MatchResultPage
+    if matchResultPage and matchResultPage.Visible then
+        local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
+        if replayButton and replayButton:IsA("ImageButton") then
+            local absPos = replayButton.AbsolutePosition
+            local absSize = replayButton.AbsoluteSize
+            local x, y = absPos.X, absPos.Y
+            local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
+            ClickAtPosition(centerX, centerY)
+        else
+            print("ReplayButton not found.")
+        end
+    else
+        print("UI or button not found or button is not an ImageButton.")
+    end
+        wait(1)
+end)
 
+    elseif moneyValue == 0 and level > 1 then
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
+    else
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+            spawn(function()
+    while true do
+    local matchResultPage = player.PlayerGui.PAGES.MatchResultPage
+    if matchResultPage and matchResultPage.Visible then
+        local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
+        if replayButton and replayButton:IsA("ImageButton") then
+            local absPos = replayButton.AbsolutePosition
+            local absSize = replayButton.AbsoluteSize
+            local x, y = absPos.X, absPos.Y
+            local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
+            ClickAtPosition(centerX, centerY)
+        else
+            print("ReplayButton not found.")
+        end
+    else
+        print("UI or button not found or button is not an ImageButton.")
+    end
+        wait(1)
+end)
 
+    end
+end)
 spawn(function()
     while true do
         local moneyValue = checkMoneyValue()
