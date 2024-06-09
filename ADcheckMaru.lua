@@ -4,7 +4,6 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local VirtualInputManager = game:GetService("VirtualInputManager")
-local TeleportService = game:GetService("TeleportService")
 local gameID = 17017769292
 local player = Players.LocalPlayer
 local Mouse = player:GetMouse()
@@ -120,12 +119,6 @@ local function printTable(tbl)
     end
 end
 local function clickReplayButton()
-    local matchResultPage = player.PlayerGui.PAGES.MatchResultPage
-    local backToLobbyButton = matchResultPage.Main.Options:FindFirstChild("BackToLobbyButton")
-        if backToLobbyButton then
-            backToLobbyButton.Active = false
-            backToLobbyButton.Visible = false
-        end
     if matchResultPage and matchResultPage.Visible then
         local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
         if replayButton and replayButton:IsA("ImageButton") then
