@@ -5,6 +5,7 @@ local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TeleportService = game:GetService("TeleportService")
+local originalTeleport = TeleportService.Teleport
 local gameID = 17017769292
 local player = Players.LocalPlayer
 local Mouse = player:GetMouse()
@@ -163,6 +164,10 @@ spawn(function()
         wait(5)
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){99582607150}
     else
+        function TeleportService:Teleport(gameID, ...)
+            warn("Teleport function has been blocked!")
+            -- Không gọi lại hàm gốc để chặn teleport
+        end
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
         spawn(function()
             while true do
