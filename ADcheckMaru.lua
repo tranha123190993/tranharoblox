@@ -185,28 +185,28 @@ spawn(function()
 end)
 
 spawn(function()
+    local timeElapsed = 0
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
             printTable(value)
-            writeDataToFile()
+            if timeElapsed >= 40 then
+                writeDataToFile()
+                timeElapsed = 0 -- Reset the counter after writing to file
+            end
         else
             warn("Không thể nhận giá trị từ server: " .. tostring(value))
         end
-        wait(25)
+        wait(15)
+        timeElapsed = timeElapsed + 15
     end
 end)
+
 
 spawn(function()
     local moneyValue = checkMoneyValue()
     local level
     repeat
-        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
-        if success then
-            printTable(value)
-        else
-            warn("Không thể nhận giá trị từ server: " .. tostring(value))
-        end
         level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
         wait(2)
     until level ~= 0
