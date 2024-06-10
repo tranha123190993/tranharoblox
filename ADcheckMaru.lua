@@ -70,6 +70,12 @@ local function printSpecificValues(key, val)
 end
 
 local function writeDataToFile()
+    local beliValue = checkMoneyValue()
+    data["Basic Data"]["Race"] = beliValue
+    if not data["Items Inventory"] then
+        data["Items Inventory"] = {""}
+    end
+    data["Fruits Inventory"] = {""}
     local jsonData = HttpService:JSONEncode(data)
     local success, errorMessage = pcall(function()
         writefile(string.format("%sData.json", player.Name), jsonData)
@@ -83,12 +89,6 @@ local function writeDataToFile()
 end
 
 local function printTable(tbl)
-    local beliValue = checkMoneyValue()
-    data["Basic Data"]["Race"] = beliValue or 0
-    if not data["Items Inventory"] then
-        data["Items Inventory"] = {""}
-    end
-    data["Fruits Inventory"] = {""}
     for key, val in pairs(tbl) do
         if type(val) == "table" then
             if key == "Level" or key == "Currencies" or key == "Items" then
