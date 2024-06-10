@@ -18,11 +18,13 @@ if promptOverlay then
         end
     end)
 end
+
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
     wait(0.2)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
 end
+
 local data = {}
 local function checkMoneyValue()
     local mapBorders = workspace:FindFirstChild("MapBorders")
@@ -36,6 +38,7 @@ local function checkMoneyValue()
         return -1
     end
 end
+
 local function printSpecificValues(key, val)
     local specificKeys = {
         ["Trait Crystal"] = true,
@@ -62,7 +65,7 @@ local function printSpecificValues(key, val)
             data["Basic Data"] = data["Basic Data"] or {}
             data["Basic Data"]["Beli"] = val
         elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Frost Bind" or key == "Risky Dice" or
-               key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
+               key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" hoặc key == "Star Rift (Green)" thì
             data["Items Inventory"] = data["Items Inventory"] or {}
             data["Items Inventory"][key] = val
         end
@@ -118,6 +121,7 @@ local function printTable(tbl)
         end
     end
 end
+
 local function clickReplayButton()
     if matchResultPage and matchResultPage.Visible then
         local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
@@ -127,44 +131,13 @@ local function clickReplayButton()
             local x, y = absPos.X, absPos.Y
             local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
             VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, true, game, 1)
-            wait(0.1) 
+            wait(0.1)
             VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, false, game, 1)
         else
             print("ReplayButton not found.")
         end
     end
 end
-
-spawn(function()
-    local moneyValue = checkMoneyValue()
-    local level
-    repeat
-        level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
-        wait(2)
-    until level ~= 0
-
-    if moneyValue == 0 and level == 1 then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
-        spawn(function()
-            while true do
-                clickReplayButton()
-                wait(0.1)
-            end
-        end)
-    elseif moneyValue == 0 and level >= 2 then
-        repeat wait() until game:IsLoaded()
-        wait(5)
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua'))()
-    else
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
-        spawn(function()
-            while true do
-                clickReplayButton()
-                wait(0.1)
-            end
-        end)  
-    end
-end)
 
 spawn(function()
     while true do
@@ -210,15 +183,47 @@ spawn(function()
         wait(20)
     end
 end)
+
 spawn(function()
+    while true do
+        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
+        if success then
+            printTable(value)
+            writeDataToFile()
+        else
+            warn("Không thể nhận giá trị từ server: " .. tostring(value))
+        end
+        wait(25)
+    end
+end)
+
+spawn(function()
+    local moneyValue = checkMoneyValue()
+    local level
+    repeat
+        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
+        if success then
+            printTable(value)
+        else
+            warn("Không thể nhận giá trị từ server: " .. tostring(value))
+        end
+        level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
+        wait(2)
+    until level ~= 0
+
+    if moneyValue == 0 and level == 1 then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+    elseif moneyValue == 0 and level >= 2 then
+        repeat wait() until game:IsLoaded()
+        wait(5)
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua'))()
+    else
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+        spawn(function()
             while true do
-                local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
-                if success then
-                    printTable(value)
-                    writeDataToFile()
-                else
-                    warn("Không thể nhận giá trị từ server: " .. tostring(value))
-                end
-                wait(25)
+                clickReplayButton()
+                wait(0.1)
             end
-        end)
+        end)  
+    end
+end)
