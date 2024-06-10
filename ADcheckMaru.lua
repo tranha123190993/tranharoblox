@@ -219,6 +219,6 @@ spawn(function()
                 else
                     warn("Không thể nhận giá trị từ server: " .. tostring(value))
                 end
-                wait(40)
+                wait(25)
             end
         end)
