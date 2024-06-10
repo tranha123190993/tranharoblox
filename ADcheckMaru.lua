@@ -133,6 +133,21 @@ local function clickReplayButton()
         end
     end
 end
+local timeElapsed = 0
+    while true do
+        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
+        if success then
+            printTable(value)
+            if timeElapsed >= 30 then
+                writeDataToFile()
+                timeElapsed = 0 -- Reset the counter after writing to file
+            end
+        else
+            warn("Không thể nhận giá trị từ server: " .. tostring(value))
+        end
+        wait(10)
+        timeElapsed = timeElapsed + 10
+    end
 spawn(function()
     while true do
         local moneyValue = checkMoneyValue()
@@ -198,22 +213,5 @@ spawn(function()
                 wait(0.1)
             end
         end)  
-    end
-end)
-spawn(function()
-    local timeElapsed = 0
-    while true do
-        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
-        if success then
-            printTable(value)
-            if timeElapsed >= 40 then
-                writeDataToFile()
-                timeElapsed = 0 -- Reset the counter after writing to file
-            end
-        else
-            warn("Không thể nhận giá trị từ server: " .. tostring(value))
-        end
-        wait(10)
-        timeElapsed = timeElapsed + 10
     end
 end)
