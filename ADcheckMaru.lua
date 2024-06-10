@@ -151,34 +151,10 @@ spawn(function()
                 wait(0.1)
             end
         end)
-        spawn(function()
-            while true do
-                local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
-                if success then
-                    printTable(value)
-                    writeDataToFile()
-                else
-                    warn("Không thể nhận giá trị từ server: " .. tostring(value))
-                end
-                wait(10)
-            end
-        end)
     elseif moneyValue == 0 and level >= 2 then
         repeat wait() until game:IsLoaded()
         wait(5)
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua'))()
-        spawn(function()
-            while true do
-                local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
-                if success then
-                    printTable(value)
-                    writeDataToFile()
-                else
-                    warn("Không thể nhận giá trị từ server: " .. tostring(value))
-                end
-                wait(10)
-            end
-        end)
     else
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
         spawn(function()
@@ -186,19 +162,7 @@ spawn(function()
                 clickReplayButton()
                 wait(0.1)
             end
-        end)
-        spawn(function()
-            while true do
-                local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
-                if success then
-                    printTable(value)
-                    writeDataToFile()
-                else
-                    warn("Không thể nhận giá trị từ server: " .. tostring(value))
-                end
-                wait(10)
-            end
-        end)
+        end)  
     end
 end)
 
@@ -246,3 +210,15 @@ spawn(function()
         wait(20)
     end
 end)
+spawn(function()
+            while true do
+                local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
+                if success then
+                    printTable(value)
+                    writeDataToFile()
+                else
+                    warn("Không thể nhận giá trị từ server: " .. tostring(value))
+                end
+                wait(40)
+            end
+        end)
