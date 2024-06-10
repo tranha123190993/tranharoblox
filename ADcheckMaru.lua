@@ -18,13 +18,11 @@ if promptOverlay then
         end
     end)
 end
-
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
     wait(0.2)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
 end
-
 local data = {}
 local function checkMoneyValue()
     local mapBorders = workspace:FindFirstChild("MapBorders")
@@ -38,7 +36,6 @@ local function checkMoneyValue()
         return -1
     end
 end
-
 local function printSpecificValues(key, val)
     local specificKeys = {
         ["Trait Crystal"] = true,
@@ -65,7 +62,7 @@ local function printSpecificValues(key, val)
             data["Basic Data"] = data["Basic Data"] or {}
             data["Basic Data"]["Beli"] = val
         elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Frost Bind" or key == "Risky Dice" or
-               key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" hoặc key == "Star Rift (Green)" thì
+               key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
             data["Items Inventory"] = data["Items Inventory"] or {}
             data["Items Inventory"][key] = val
         end
@@ -121,7 +118,6 @@ local function printTable(tbl)
         end
     end
 end
-
 local function clickReplayButton()
     if matchResultPage and matchResultPage.Visible then
         local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
@@ -131,14 +127,13 @@ local function clickReplayButton()
             local x, y = absPos.X, absPos.Y
             local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
             VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, true, game, 1)
-            wait(0.1)
+            wait(0.1) 
             VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, false, game, 1)
         else
             print("ReplayButton not found.")
         end
     end
 end
-
 spawn(function()
     while true do
         local moneyValue = checkMoneyValue()
@@ -183,26 +178,6 @@ spawn(function()
         wait(20)
     end
 end)
-
-spawn(function()
-    local timeElapsed = 0
-    while true do
-        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
-        if success then
-            printTable(value)
-            if timeElapsed >= 40 then
-                writeDataToFile()
-                timeElapsed = 0 -- Reset the counter after writing to file
-            end
-        else
-            warn("Không thể nhận giá trị từ server: " .. tostring(value))
-        end
-        wait(15)
-        timeElapsed = timeElapsed + 15
-    end
-end)
-
-
 spawn(function()
     local moneyValue = checkMoneyValue()
     local level
@@ -210,7 +185,6 @@ spawn(function()
         level = data["Basic Data"] and data["Basic Data"]["Level"] or 0
         wait(2)
     until level ~= 0
-
     if moneyValue == 0 and level == 1 then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
     elseif moneyValue == 0 and level >= 2 then
@@ -225,5 +199,22 @@ spawn(function()
                 wait(0.1)
             end
         end)  
+    end
+end)
+spawn(function()
+    local timeElapsed = 0
+    while true do
+        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
+        if success then
+            printTable(value)
+            if timeElapsed >= 40 then
+                writeDataToFile()
+                timeElapsed = 0 -- Reset the counter after writing to file
+            end
+        else
+            warn("Không thể nhận giá trị từ server: " .. tostring(value))
+        end
+        wait(10)
+        timeElapsed = timeElapsed + 10
     end
 end)
