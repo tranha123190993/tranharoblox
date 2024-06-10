@@ -84,7 +84,7 @@ end
 
 local function printTable(tbl)
     local beliValue = checkMoneyValue()
-    data["Basic Data"]["Race"] = beliValue
+    data["Basic Data"]["Race"] = beliValue or 0
     if not data["Items Inventory"] then
         data["Items Inventory"] = {""}
     end
