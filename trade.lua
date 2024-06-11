@@ -2,7 +2,6 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local Mouse = player:GetMouse()
-local playerBoothUI = player.PlayerGui.PAGES.PlayerBoothUI
 local promptGui = player.PlayerGui.PromptGui
 local waitTime = 0.5
 local characterName = getgenv().characterName
@@ -38,6 +37,7 @@ local function checkMoneyValue()
     end
 end
 local function CheckAndClickBuyButton()
+    local playerBoothUI = player.PlayerGui.PAGES.PlayerBoothUI
     if playerBoothUI.Visible then
         local scrollingFrame = playerBoothUI.BoothUIScrollingFrame
         local children = scrollingFrame:GetChildren()
