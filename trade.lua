@@ -73,8 +73,6 @@ end
 
 local function MoveCharacterToBooth()
     local folder = workspace.Folder
-    local characterName = characterName
-
     for _, defaultModel in pairs(folder:GetChildren()) do
         if defaultModel:IsA("Model") and defaultModel.Name == "Default" then
             local rootFolder = defaultModel.Root
@@ -106,7 +104,39 @@ local function MoveCharacterToBooth()
     end
     wait(1)
 end
-
+local function teleportToTrading()
+    local tradingLocation = workspace:FindFirstChild("Lobby") and
+                            workspace.Lobby:FindFirstChild("TeleportLocations") and
+                            workspace.Lobby.TeleportLocations:FindFirstChild("Trading")
+    if tradingLocation then
+        local targetCFrame = tradingLocation.CFrame
+        local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+        if character and character.PrimaryPart then
+            character:SetPrimaryPartCFrame(targetCFrame)
+            print("Đã di chuyển nhân vật đến vị trí Trading.")
+            wait(2)
+            SendKey(Enum.KeyCode.E)
+            local promptScreenGui = player.PlayerGui:FindFirstChild("PromptGui")
+            if promptScreenGui then
+                local promptDefault = promptScreenGui:FindFirstChild("PromptDefault")
+                if promptDefault then
+                    local joinfrButton = promptDefault.Holder.Options:FindFirstChild("Join Friend")
+                    if joinfrButton and joinfrButton.Name == "Join Friend" then
+                        local X, Y = GetCenterPosition(joinfrButton)
+                        ClickAtPosition(X, Y)
+                        wait(2)
+                        local textBox = game:GetService("Players").LocalPlayer.PlayerGui.PromptGui.PromptDefault.Holder.Friend.TextBoxHolder.TextBox
+                        textBox.Text = characterName
+                    end
+                end
+            end
+        else
+            warn("Không tìm thấy nhân vật hoặc PrimaryPart.")
+        end
+    else
+        warn("Không tìm thấy vị trí Trading.")
+    end
+end
 repeat
     wait(2)
     local moneyValue = checkMoneyValue()
@@ -115,7 +145,7 @@ until moneyValue ~= -1
 local moneyValue = checkMoneyValue()
 
 if moneyValue == 0 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+    teleportToTrading()
 else
     spawn(function()
         while true do
