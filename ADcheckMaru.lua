@@ -118,6 +118,7 @@ local function printTable(tbl)
     end
 end
 local function clickReplayButton()
+    local matchResultPage = player.PlayerGui.PAGES:FindFirstChild("MatchResultPage")
     if matchResultPage and matchResultPage.Visible then
         local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
         if replayButton and replayButton:IsA("ImageButton") then
