@@ -114,9 +114,9 @@ local function teleportToTrading()
         if character and character.PrimaryPart then
             character:SetPrimaryPartCFrame(targetCFrame)
             print("Đã di chuyển nhân vật đến vị trí Trading.")
-            wait(2)
+            wait(1)
             SendKey(Enum.KeyCode.E)
-            wait(2)
+            wait(1)
             local promptScreenGui = player.PlayerGui:FindFirstChild("PromptGui")
             if promptScreenGui then
                 local promptDefault = promptScreenGui:FindFirstChild("PromptDefault")
@@ -128,6 +128,12 @@ local function teleportToTrading()
                         wait(2)
                         local textBox = game:GetService("Players").LocalPlayer.PlayerGui.PromptGui.PromptDefault.Holder.Friend.TextBoxHolder.TextBox
                         textBox.Text = characterName
+                        wait(0.5)
+                        local teleButton = promptDefault.Holder.Options:FindFirstChild("Teleport")
+                            if teleButton and teleButton.Name == "Teleport" then
+                                local teleX, teleY = GetCenterPosition(teleButton)
+                                ClickAtPosition(teleX, teleY)
+                            end
                     end
                 end
             end
