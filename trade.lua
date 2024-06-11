@@ -129,11 +129,7 @@ local function teleportToTrading()
                         local textBox = game:GetService("Players").LocalPlayer.PlayerGui.PromptGui.PromptDefault.Holder.Friend.TextBoxHolder.TextBox
                         textBox.Text = characterName
                         wait(0.5)
-                        local teleButton = promptDefault.Holder.Options:FindFirstChild("Teleport")
-                            if teleButton and teleButton.Name == "Teleport" then
-                                local teleX, teleY = GetCenterPosition(teleButton)
-                                ClickAtPosition(teleX, teleY)
-                            end
+                        ClickAtPosition(X, Y)
                     end
                 end
             end
