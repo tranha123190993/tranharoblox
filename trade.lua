@@ -47,6 +47,8 @@ local function CheckAndClickBuyButton()
                             if buyButton then
                                 local X, Y = GetCenterPosition(buyButton)
                                 ClickAtPosition(X, Y)
+                                wait(5)
+                                game:GetService("ReplicatedStorage"):WaitForChild("TradeRemotes"):WaitForChild("SendTradeRequest"):InvokeServer(game:GetService("Players"):WaitForChild(characterName), false, true)
                                 break
                             end
                         end
