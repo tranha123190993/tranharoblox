@@ -16,7 +16,7 @@ local function GetCenterPosition(guiElement)
     local absPos = guiElement.AbsolutePosition
     local absSize = guiElement.AbsoluteSize
     local x, y = absPos.X, absPos.Y
-    local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2
+    local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 10
     return centerX, centerY
 end
 
@@ -76,10 +76,15 @@ local function MoveCharacterToBooth()
                     local newCFrame = parentCFrame:ToWorldSpace(CFrame.new(0, 0, -5))
                     local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
                     if character then
-                        character:SetPrimaryPartCFrame(newCFrame)
-                        print("Đã di chuyển nhân vật đến vị trí mới của thư mục cha.")
-                        wait(2)
-                        SendKey(Enum.KeyCode.E)
+                        local currentCFrame = character:GetPrimaryPartCFrame()
+                        if currentCFrame == newCFrame then
+                            
+                        else
+                            character:SetPrimaryPartCFrame(newCFrame)
+                            print("Đã di chuyển nhân vật đến vị trí shop.")
+                            wait(2)
+                            SendKey(Enum.KeyCode.E)
+                        end
                         return
                     else
                         warn("Không tìm thấy nhân vật.")
@@ -90,6 +95,7 @@ local function MoveCharacterToBooth()
     end
     wait(1)
 end
+
 
 spawn(function()
     while true do
