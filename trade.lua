@@ -44,7 +44,7 @@ local function CheckAndClickBuyButton()
                         local promptDefault = promptScreenGui:FindFirstChild("PromptDefault")
                         if promptDefault then
                             local buyButton = promptDefault.Holder.Options:FindFirstChild("Buy")
-                            if buyButton then
+                            if buyButton and buyButton.Name == "Buy" then
                                 local X, Y = GetCenterPosition(buyButton)
                                 ClickAtPosition(X, Y)
                                 wait(5)
