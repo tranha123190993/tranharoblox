@@ -25,7 +25,18 @@ local function SendKey(key)
     wait(0.2)
     VirtualInputManager:SendKeyEvent(false, key, false, game)
 end
-
+local function checkMoneyValue()
+    local mapBorders = workspace:FindFirstChild("MapBorders")
+    if mapBorders then
+        return 1
+    elseif workspace:FindFirstChild("Lobby") then
+        return 0
+    elseif workspace:FindFirstChild("TradingLobby") then
+        return 2
+    else
+        return -1
+    end
+end
 local function CheckAndClickBuyButton()
     if playerBoothUI.Visible then
         local scrollingFrame = playerBoothUI.BoothUIScrollingFrame
@@ -96,17 +107,27 @@ local function MoveCharacterToBooth()
     wait(1)
 end
 
+repeat
+    wait(2)
+    local moneyValue = checkMoneyValue()
+until moneyValue ~= -1
 
-spawn(function()
-    while true do
-        MoveCharacterToBooth()
-        wait(waitTime)
-    end
-end)
+local moneyValue = checkMoneyValue()
 
-spawn(function()
-    while true do
-        CheckAndClickBuyButton()
-        wait(waitTime)
-    end
-end)
+if moneyValue == 0 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+else
+    spawn(function()
+        while true do
+            MoveCharacterToBooth()
+            wait(waitTime)
+        end
+    end)
+
+    spawn(function()
+        while true do
+            CheckAndClickBuyButton()
+            wait(waitTime)
+        end
+    end)
+end
