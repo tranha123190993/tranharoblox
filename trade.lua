@@ -116,6 +116,7 @@ local function teleportToTrading()
             print("Đã di chuyển nhân vật đến vị trí Trading.")
             wait(2)
             SendKey(Enum.KeyCode.E)
+            wait(2)
             local promptScreenGui = player.PlayerGui:FindFirstChild("PromptGui")
             if promptScreenGui then
                 local promptDefault = promptScreenGui:FindFirstChild("PromptDefault")
