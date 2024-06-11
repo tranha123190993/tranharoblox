@@ -1,3 +1,10 @@
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local function SendKey(key)
+    VirtualInputManager:SendKeyEvent(true, key, false, game)
+    wait(0.2)
+    VirtualInputManager:SendKeyEvent(false, key, false, game)
+end
+
 while true do
     local folder = workspace.Folder
     local characterName = "Lucky7777"  -- Tên nhân vật bạn muốn tìm kiếm
@@ -16,6 +23,8 @@ while true do
                     if character then
                         character:SetPrimaryPartCFrame(newCFrame)
                         print("Đã di chuyển nhân vật đến vị trí mới của thư mục cha.")
+                        wait(2)
+                        SendKey(Enum.KeyCode.E)
                         return  -- Kết thúc vòng lặp khi tìm ra tên nhân vật
                     else
                         warn("Không tìm thấy nhân vật.")
