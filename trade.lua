@@ -16,7 +16,7 @@ local function GetCenterPosition(guiElement)
     local absPos = guiElement.AbsolutePosition
     local absSize = guiElement.AbsoluteSize
     local x, y = absPos.X, absPos.Y
-    local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 10
+    local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 20
     return centerX, centerY
 end
 
