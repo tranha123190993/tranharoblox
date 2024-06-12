@@ -173,7 +173,7 @@ else
     game:GetService("CoreGui").PlayerList.PlayerListMaster.Visible = false
     local soluongGem = game:GetService("Players").LocalPlayer.leaderstats["\240\159\146\142 Gems"].Value
     local textBox = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.TextContainer.TextBoxContainer.TextBox
-    textBox.Text = "/w " .. player
+    textBox.Text = "/w " .. characterName
     wait(1)
     textBox.Text = "DG" .. soluongGem
     local sendButton = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton
