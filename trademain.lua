@@ -30,7 +30,20 @@ local function GetCenterPosition(guiElement)
     return centerX, centerY
 end
 
-
+local function CheckAndClickLockButton()
+    local TradeTransactionUI = game.Players.LocalPlayer.PlayerGui.UI.TradeTransactionUI
+    local ReceiveContents = TradeTransactionUI.ReceiveContents
+    
+    if ReceiveContents.Locked.Enabled then
+        local LockButton = TradeTransactionUI.Lock
+        if LockButton then
+            local X, Y = GetCenterPosition(LockButton)
+            ClickAtPosition(X - 10, Y + 30)
+            return true
+        end
+    end
+    return false 
+end
 -- nhận tin nhắn tên clone và lưu số lượng gem ra
 local function CheckAndPrintSender()
     local RCTScrollContentView = game:GetService("CoreGui").ExperienceChat.appLayout.chatWindow.scrollingView.bottomLockedScrollView.RCTScrollView.RCTScrollContentView
@@ -115,3 +128,9 @@ spawn(function()
   end
 end)
 end
+spawn(function()
+    while true do
+        CheckAndClickLockButton()
+        wait(2) 
+    end
+end)
