@@ -9,7 +9,18 @@ local function ClickAtPosition(x, y)
     wait(0.1)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
 end
-
+local function checkMoneyValue()
+    local mapBorders = workspace:FindFirstChild("MapBorders")
+    if mapBorders then
+        return 1
+    elseif workspace:FindFirstChild("Lobby") then
+        return 0
+    elseif workspace:FindFirstChild("TradingLobby") then
+        return 2
+    else
+        return -1
+    end
+end
 -- Hàm để lấy vị trí trung tâm của một GUI Element
 local function GetCenterPosition(guiElement)
     local absPos = guiElement.AbsolutePosition
@@ -73,7 +84,19 @@ local function ClickButtonBack()
         end
     end
 end
-spawn(function()
+repeat
+    wait(2)
+    local moneyValue = checkMoneyValue()
+until moneyValue ~= -1
+
+local moneyValue = checkMoneyValue()
+
+if moneyValue == 0 then
+    game:GetService("TeleportService"):Teleport(17490500437)
+else
+    game:GetService("CoreGui").ExperienceChat.appLayout.Visible = false
+    game:GetService("CoreGui").PlayerList.PlayerListMaster.Visible = false
+    spawn(function()
   while true do
       CheckAndPrintSender()
       wait(3)
@@ -91,4 +114,4 @@ spawn(function()
     wait(1)
   end
 end)
-
+end
