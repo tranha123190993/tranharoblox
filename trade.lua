@@ -63,32 +63,82 @@ local function ClickUnitGridPrefabs()
         end
     end
 end
+local function GetAbsoluteCellCount(gridLayout)
+    return gridLayout.AbsoluteCellCount
+end
+
 local function ClickAddItemsAndFindRiskyDice()
-    local TradeTransactionUI = game.Players.LocalPlayer.PlayerGui.UI.TradeTransactionUI
-    
-    -- Click vào nút AddItemsButton
-    local AddItemsButton = TradeTransactionUI.AddItemsButton
-    local X, Y = GetCenterPosition(AddItemsButton)
-                    ClickAtPosition(X - 20, Y + 40)
-    
-    -- Lấy PromptGui
-    local PromptGui = game.Players.LocalPlayer.PlayerGui.PromptGui
-    
-    -- Lặp qua các child của PromptGui để tìm ScrollingFrame "Risky Dice"
-    for _, child in ipairs(PromptGui:GetChildren()) do
-        local scrollingFrame = child.ScrollingFrame
-        if scrollingFrame and scrollingFrame.Name == "Risky Dice" then
-            local X, Y = GetCenterPosition(scrollingFrame)
-                    ClickAtPosition(X - 20, Y + 40)
-            local count = child.FocusDisplay.InfoHolder.Count
-            if count then
-                local layoutOrder = count.LayoutOrder
-                -- Lưu layoutOrder vào biến của bạn
-                print("LayoutOrder của Count:", layoutOrder)
-                -- Ví dụ: Lưu vào biến global hoặc local
-                -- local myVariable = layoutOrder
+    local maxAttempts = 3  
+    local attemptCount = 0  
+
+    while attemptCount < maxAttempts do
+        local TradeTransactionUI = game.Players.LocalPlayer.PlayerGui.UI.TradeTransactionUI
+        local AddItemsButton = TradeTransactionUI.AddItemsButton
+        local X, Y = GetCenterPosition(AddItemsButton)
+        ClickAtPosition(X - 20, Y + 30)
+        wait(1)
+        local PromptGui = game.Players.LocalPlayer.PlayerGui.PromptGui
+        local foundMatchingChild = false 
+        for _, child in ipairs(PromptGui:GetChildren()) do
+            local scrollingFrame = child:FindFirstChild("ScrollingFrame")
+            if scrollingFrame then
+                local uiGridLayout = scrollingFrame.UIGridLayout
+                local absCellCount = GetAbsoluteCellCount(uiGridLayout)
+                maxAttempts = absCellCount.X
+                
+                for _, subChild in ipairs(scrollingFrame:GetChildren()) do
+                    if subChild.Name == "Risky Dice" or
+                       subChild.Name == "Trait Crystal" or
+                       subChild.Name == "Energy Crystal" or
+                       subChild.Name == "Frost Bind" or
+                       subChild.Name == "Star Rift (Red)" or
+                       subChild.Name == "Star Rift (Blue)" or
+                       subChild.Name == "Star Rift (Yellow)" or
+                       subChild.Name == "Star Rift (Green)" then
+                        local centerX, centerY = GetCenterPosition(subChild)
+                        ClickAtPosition(centerX - 10, centerY + 30)
+                        wait(0.5)
+                        local sliderFrame = child:FindFirstChild("SliderFrame")
+                        if sliderFrame then
+                            local sliderButton = sliderFrame:FindFirstChild("SliderButton")
+                            if sliderButton then
+                                local sliderVisual = sliderButton:FindFirstChild("SliderVisual")
+                                if sliderVisual then
+                                    local ballFrame = sliderVisual:FindFirstChild("BallFrame")
+                                    if ballFrame then
+                                        local ballCenterX, ballCenterY = GetCenterPosition(ballFrame)
+                                        local offsetX = 135
+                                        local offsetY = 35
+                                        ClickAtPosition(ballCenterX + offsetX, ballCenterY + offsetY)
+                                    end
+                                end
+                            end
+                        end
+                        wait(0.5)
+                        local optionsHolder = child:FindFirstChild("OptionsHolder")
+                        if optionsHolder then
+                            local optionsCenterX, optionsCenterY = GetCenterPosition(optionsHolder)
+                            ClickAtPosition(optionsCenterX - 10, optionsCenterY + 30)
+                        end
+                        
+                        foundMatchingChild = true
+                        break 
+                    end
+                end
+                
+                if foundMatchingChild then
+                    break 
+                end
             end
         end
+        
+        attemptCount = attemptCount + 1
+        wait(1) 
+    end
+    local LockButton = game:GetService("Players").LocalPlayer.PlayerGui.UI.TradeTransactionUI.Lock
+    if LockButton then
+        local X, Y = GetCenterPosition(LockButton)
+        ClickAtPosition(X - 10, Y + 30)
     end
 end
 
