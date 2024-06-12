@@ -70,7 +70,7 @@ local function CheckAndClickBuyButton()
         end
     end
 end
-
+local teleported = false
 local function MoveCharacterToBooth()
     local folder = workspace.Folder
     for _, defaultModel in pairs(folder:GetChildren()) do
@@ -85,14 +85,17 @@ local function MoveCharacterToBooth()
                     local newCFrame = parentCFrame:ToWorldSpace(CFrame.new(0, 0, -5))
                     local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
                     if character then
-                        local currentCFrame = character:GetPrimaryPartCFrame()
-                        if currentCFrame == newCFrame then
-                            
-                        else
-                            character:SetPrimaryPartCFrame(newCFrame)
-                            print("Đã di chuyển nhân vật đến vị trí shop.")
-                            wait(2)
-                            SendKey(Enum.KeyCode.E)
+                        if not teleported then
+                            local currentCFrame = character:GetPrimaryPartCFrame()
+                            if currentCFrame == newCFrame then
+                                teleported = true
+                            else
+                                character:SetPrimaryPartCFrame(newCFrame)
+                                print("Đã di chuyển nhân vật đến vị trí shop.")
+                                wait(2)
+                                SendKey(Enum.KeyCode.E)
+                                teleported = true
+                            end
                         end
                         return
                     else
@@ -152,7 +155,11 @@ if moneyValue == 0 then
 else
     spawn(function()
         while true do
-            MoveCharacterToBooth()
+            if not teleported then
+                MoveCharacterToBooth()
+            else
+                break
+            end
             wait(waitTime)
         end
     end)
