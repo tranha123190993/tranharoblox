@@ -36,6 +36,7 @@ local function checkMoneyValue()
         return -1
     end
 end
+local isbought = false
 local function CheckAndClickBuyButton()
     local playerBoothUI = player.PlayerGui.PAGES.PlayerBoothUI
     if playerBoothUI.Visible then
@@ -56,11 +57,14 @@ local function CheckAndClickBuyButton()
                         if promptDefault then
                             local buyButton = promptDefault.Holder.Options:FindFirstChild("Buy")
                             if buyButton and buyButton.Name == "Buy" then
-                                local X, Y = GetCenterPosition(buyButton)
-                                ClickAtPosition(X, Y)
-                                wait(5)
-                                game:GetService("ReplicatedStorage"):WaitForChild("TradeRemotes"):WaitForChild("SendTradeRequest"):InvokeServer(game:GetService("Players"):WaitForChild(characterName), false, true)
-                                break
+                                if not isbought then
+                                    local X, Y = GetCenterPosition(buyButton)
+                                    ClickAtPosition(X, Y)
+                                    wait(5)
+                                    game:GetService("ReplicatedStorage"):WaitForChild("TradeRemotes"):WaitForChild("SendTradeRequest"):InvokeServer(game:GetService("Players"):WaitForChild(characterName), false, true)
+                                    isbought = true
+                                    break
+                                end
                             end
                         end
                     end
@@ -166,7 +170,11 @@ else
 
     spawn(function()
         while true do
-            CheckAndClickBuyButton()
+            if not isbought then
+                CheckAndClickBuyButton()
+            else
+                break
+            end
             wait(waitTime)
         end
     end)
