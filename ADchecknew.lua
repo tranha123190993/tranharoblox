@@ -199,7 +199,7 @@ spawn(function()
     repeat wait() until game:IsLoaded()
     wait(5)
         if isfolder('Luarmor') then delfolder('Luarmor') end
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){248738385655}
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){255966457793}
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
