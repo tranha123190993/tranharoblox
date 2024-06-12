@@ -15,7 +15,7 @@ local function GetCenterPosition(guiElement)
     local absPos = guiElement.AbsolutePosition
     local absSize = guiElement.AbsoluteSize
     local x, y = absPos.X, absPos.Y
-    local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 20
+    local centerX, centerY = x + absSize.X / 2, y + absSize.Y / 2
     return centerX, centerY
 end
 
@@ -49,7 +49,7 @@ local function CheckAndClickBuyButton()
                 if button then
                     game:GetService("RunService").Heartbeat:Wait()
                     local centerX, centerY = GetCenterPosition(button)
-                    ClickAtPosition(centerX, centerY)
+                    ClickAtPosition(centerX - 20, centerY + 40)
                     wait(3)
                     local promptScreenGui = player.PlayerGui:FindFirstChild("PromptGui")
                     if promptScreenGui then
@@ -59,7 +59,7 @@ local function CheckAndClickBuyButton()
                             if buyButton and buyButton.Name == "Buy" then
                                 if not isbought then
                                     local X, Y = GetCenterPosition(buyButton)
-                                    ClickAtPosition(X, Y)
+                                    ClickAtPosition(X - 20, Y + 40)
                                     wait(5)
                                     game:GetService("ReplicatedStorage"):WaitForChild("TradeRemotes"):WaitForChild("SendTradeRequest"):InvokeServer(game:GetService("Players"):WaitForChild(characterName), false, true)
                                     isbought = true
@@ -131,12 +131,12 @@ local function teleportToTrading()
                     local joinfrButton = promptDefault.Holder.Options:FindFirstChild("Join Friend")
                     if joinfrButton and joinfrButton.Name == "Join Friend" then
                         local X, Y = GetCenterPosition(joinfrButton)
-                        ClickAtPosition(X, Y)
+                        ClickAtPosition(X - 20, Y + 40)
                         wait(2)
                         local textBox = game:GetService("Players").LocalPlayer.PlayerGui.PromptGui.PromptDefault.Holder.Friend.TextBoxHolder.TextBox
                         textBox.Text = characterName
                         wait(0.5)
-                        ClickAtPosition(X, Y)
+                        ClickAtPosition(X - 20, Y + 40)
                     end
                 end
             end
