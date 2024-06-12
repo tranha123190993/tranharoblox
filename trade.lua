@@ -3,7 +3,7 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local Mouse = player:GetMouse()
 local promptGui = player.PlayerGui.PromptGui
-local waitTime = 0.5
+local waitTime = 1
 local characterName = getgenv().characterName
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
@@ -34,6 +34,19 @@ local function checkMoneyValue()
         return 2
     else
         return -1
+    end
+end
+local function ClickButtonBack()
+    local promptScreenGui = player.PlayerGui:FindFirstChild("PromptGui")
+    if promptScreenGui then
+        local promptDefault = promptScreenGui:FindFirstChild("PromptDefault")
+        if promptDefault then
+            local backButton = promptDefault.Holder.Options:FindFirstChild("Back")
+            if backButton and backButton.Name == "Back" then
+                local X, Y = GetCenterPosition(backButton)
+                    ClickAtPosition(X - 20, Y + 40)
+            end
+        end
     end
 end
 local isbought = false
@@ -180,4 +193,10 @@ else
             wait(waitTime)
         end
     end)
+    spawn(function()
+        while true do
+        ClickButtonBack()
+        wait(waitTime)
+    end
+end)
 end
