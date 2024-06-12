@@ -190,7 +190,7 @@ spawn(function()
     elseif moneyValue == 0 and level >= 2 then
         repeat wait() until game:IsLoaded()
         wait(5)
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){248738385655}
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){255966457793}
     else
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
         spawn(function()
