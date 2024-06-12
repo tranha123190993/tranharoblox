@@ -157,6 +157,8 @@ local moneyValue = checkMoneyValue()
 if moneyValue == 0 then
     teleportToTrading()
 else
+    game:GetService("CoreGui").ExperienceChat.appLayout.Visible = false
+    game:GetService("CoreGui").PlayerList.PlayerListMaster.Visible = false
     spawn(function()
         while true do
             if not teleported then
