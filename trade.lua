@@ -49,6 +49,49 @@ local function ClickButtonBack()
         end
     end
 end
+local function ClickUnitGridPrefabs()
+    local TradeTransactionUI = game.Players.LocalPlayer.PlayerGui.UI.TradeTransactionUI
+    local SendContents = TradeTransactionUI.SendContents
+    
+    for _, unitGridPrefab in ipairs(SendContents:GetChildren()) do
+        if unitGridPrefab:IsA("Frame") and unitGridPrefab.Visible then
+            local button = unitGridPrefab.Button
+            if button then
+                local X, Y = GetCenterPosition(button)
+                    ClickAtPosition(X - 20, Y + 40)
+            end
+        end
+    end
+end
+local function ClickAddItemsAndFindRiskyDice()
+    local TradeTransactionUI = game.Players.LocalPlayer.PlayerGui.UI.TradeTransactionUI
+    
+    -- Click vào nút AddItemsButton
+    local AddItemsButton = TradeTransactionUI.AddItemsButton
+    local X, Y = GetCenterPosition(AddItemsButton)
+                    ClickAtPosition(X - 20, Y + 40)
+    
+    -- Lấy PromptGui
+    local PromptGui = game.Players.LocalPlayer.PlayerGui.PromptGui
+    
+    -- Lặp qua các child của PromptGui để tìm ScrollingFrame "Risky Dice"
+    for _, child in ipairs(PromptGui:GetChildren()) do
+        local scrollingFrame = child.ScrollingFrame
+        if scrollingFrame and scrollingFrame.Name == "Risky Dice" then
+            local X, Y = GetCenterPosition(scrollingFrame)
+                    ClickAtPosition(X - 20, Y + 40)
+            local count = child.FocusDisplay.InfoHolder.Count
+            if count then
+                local layoutOrder = count.LayoutOrder
+                -- Lưu layoutOrder vào biến của bạn
+                print("LayoutOrder của Count:", layoutOrder)
+                -- Ví dụ: Lưu vào biến global hoặc local
+                -- local myVariable = layoutOrder
+            end
+        end
+    end
+end
+
 local isbought = false
 local function CheckAndClickBuyButton()
     local playerBoothUI = player.PlayerGui.PAGES.PlayerBoothUI
@@ -75,6 +118,10 @@ local function CheckAndClickBuyButton()
                                     ClickAtPosition(X - 20, Y + 40)
                                     wait(5)
                                     game:GetService("ReplicatedStorage"):WaitForChild("TradeRemotes"):WaitForChild("SendTradeRequest"):InvokeServer(game:GetService("Players"):WaitForChild(characterName), false, true)
+                                    wait(5)
+                                    ClickUnitGridPrefabs()
+                                    wait(1)
+                                    ClickAddItemsAndFindRiskyDice()
                                     isbought = true
                                     break
                                 end
