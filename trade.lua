@@ -44,7 +44,7 @@ local function CheckAndClickBuyButton()
         local children = scrollingFrame:GetChildren()
 
         for _, child in pairs(children) do
-            if child:IsA("Frame") then
+            if child:IsA("Frame") and child.Visible then
                 local button = child.Button
                 if button then
                     game:GetService("RunService").Heartbeat:Wait()
