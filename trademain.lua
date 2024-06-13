@@ -55,7 +55,8 @@ local function ClickFirstItemButtonAndConfirm()
 	    wait(1)
 		local PromptGui = player.PlayerGui.PromptGui
 		local SellTextBox = PromptGui.PromptDefault.Holder.SellTextBox.TextBoxHolder.TextBox
-		SellTextBox.Text = "2000"
+		SellTextBox.Text = soluongGem
+		soluongGem = ""
 		local SellButtonPath = PromptGui.PromptDefault.Holder.Options.Sell
 		wait(1)
 		local XSell, YSell = GetCenterPosition(SellButtonPath)
@@ -144,6 +145,7 @@ local function CheckAndClickResponseYes()
                         local centerX, centerY = GetCenterPosition(responseYesButton)
                         ClickAtPosition(centerX - 20, centerY + 40)
                         print("Đã click vào nút ResponseYes")
+			accClone = ""
                         return
                     end
                 end
