@@ -9,6 +9,11 @@ local function ClickAtPosition(x, y)
     wait(0.1)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
 end
+local function SendKey(key, delay)
+    VirtualInputManager:SendKeyEvent(true, key, false, game)
+    wait(delay)
+    VirtualInputManager:SendKeyEvent(false, key, false, game)
+end
 local function checkMoneyValue()
     local mapBorders = workspace:FindFirstChild("MapBorders")
     if mapBorders then
@@ -29,7 +34,70 @@ local function GetCenterPosition(guiElement)
     local centerY = absPos.Y + absSize.Y / 2
     return centerX, centerY
 end
-
+local function ClickFirstItemButtonAndConfirm()
+    local scrollingFrame = player.PlayerGui.PAGES.PlayerBoothUI.ItemsGridScrollingFrame
+    local children = scrollingFrame:GetChildren()
+    local itemButton = nil
+    for _, child in ipairs(children) do
+        if child:FindFirstChild("Button") then
+            itemButton = child:FindFirstChild("Button")
+            break
+        end
+    end
+    if itemButton then
+        local X, Y = GetCenterPosition(itemButton)
+        ClickAtPosition(X - 10, Y + 30)
+        wait(0.5)
+        local ConfirmButton = player.PlayerGui.PAGES.PlayerBoothUI.BottomHolder.ModeHolder.ResponseHolder.ConfirmButton
+        if ConfirmButton then
+            local confirmX, confirmY = GetCenterPosition(ConfirmButton)
+            ClickAtPosition(confirmX - 10, confirmY + 30)
+	    wait(1)
+		local PromptGui = player.PlayerGui.PromptGui
+		local SellTextBox = PromptGui.PromptDefault.Holder.SellTextBox.TextBoxHolder.TextBox
+		SellTextBox.Text = "2000"
+		local SellButtonPath = PromptGui.PromptDefault.Holder.Options.Sell
+		wait(1)
+		local XSell, YSell = GetCenterPosition(SellButtonPath)
+      		ClickAtPosition(XSell - 10, YSell + 30)
+        end
+    end
+end
+local function MoveCharacterToFakeBooth()
+    local fxFolder = workspace.FX
+    local fxModels = fxFolder:GetChildren()
+    local fakeBoothModel = nil
+    for _, model in ipairs(fxModels) do
+        if model.Name == "FakeBooth" then
+            fakeBoothModel = model
+            break
+        end
+    end
+    local rootPart = fakeBoothModel:FindFirstChild("Root")
+    if not rootPart or not rootPart:IsA("BasePart") then
+        print("Không tìm thấy phần Root hợp lệ trong model FakeBooth")
+        return
+    end
+    
+    local targetCFrame = rootPart.CFrame
+    
+    local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+    character:SetPrimaryPartCFrame(targetCFrame)
+    wait(1)
+    SendKey(Enum.KeyCode.E, 2)
+    wait(1)
+    SendKey(Enum.KeyCode.E, 0.2)
+    wait(1)
+    local button = game:GetService("Players").LocalPlayer.PlayerGui.PAGES.PlayerBoothUI.BottomHolder.ModeHolder.ResponseHolder.Button
+    if button then
+    local X, Y = GetCenterPosition(button)
+            ClickAtPosition(X - 10, Y + 30)
+    wait(0.5)
+    ClickFirstItemButtonAndConfirm()
+else
+    print("Không tìm thấy button trong PlayerBoothUI.BottomHolder.ModeHolder.ResponseHolder")
+end
+end
 local function CheckAndClickLockButton()
     local TradeTransactionUI = game.Players.LocalPlayer.PlayerGui.UI.TradeTransactionUI
     local ReceiveContents = TradeTransactionUI.ReceiveContents
@@ -55,6 +123,7 @@ local function CheckAndPrintSender()
             if sender and message and sender ~= "" and message ~= "" then
                 accClone = sender
                 soluongGem = message
+                MoveCharacterToFakeBooth()
                 child.TextLabel.TextMessage.Text = ""
                 break
             end
