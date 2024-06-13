@@ -120,7 +120,7 @@ local function CheckAndPrintSender()
         local child = RCTScrollContentView:GetChildren()[i]
         if child:IsA("Frame") and child.TextLabel and child.TextLabel.TextMessage then
             local messageText = child.TextLabel.TextMessage.Text
-            local sender, message = messageText:match("%[From (.-)%].-</font>  a(.+)")
+            local sender, message = messageText:match("%[From (.-)%].-</font>  DG(.+)")
             if sender and message and sender ~= "" and message ~= "" then
                 accClone = sender
                 soluongGem = message
