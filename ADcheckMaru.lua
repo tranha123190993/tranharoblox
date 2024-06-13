@@ -2,11 +2,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local getInventoryRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("GetInventory")
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
-local CoreGui = game:GetService("CoreGui")
-local VirtualInputManager = game:GetService("VirtualInputManager")
 local gameID = 17017769292
 local player = Players.LocalPlayer
-local Mouse = player:GetMouse()
 local promptOverlay = game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui") and game:GetService("CoreGui").RobloxPromptGui:FindFirstChild("promptOverlay")
 local connection
 
@@ -18,11 +15,7 @@ if promptOverlay then
         end
     end)
 end
-local function ClickAtPosition(x, y)
-    VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
-    wait(0.2)
-    VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 1)
-end
+
 local data = {}
 local function checkMoneyValue()
     local mapBorders = workspace:FindFirstChild("MapBorders")
