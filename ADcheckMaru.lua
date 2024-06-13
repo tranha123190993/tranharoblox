@@ -117,23 +117,7 @@ local function printTable(tbl)
         end
     end
 end
-local function clickReplayButton()
-    local matchResultPage = player.PlayerGui.PAGES:FindFirstChild("MatchResultPage")
-    if matchResultPage and matchResultPage.Visible then
-        local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
-        if replayButton and replayButton:IsA("ImageButton") then
-            local absPos = replayButton.AbsolutePosition
-            local absSize = replayButton.AbsoluteSize
-            local x, y = absPos.X, absPos.Y
-            local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
-            VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, true, game, 1)
-            wait(0.2) 
-            VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, false, game, 1)
-        else
-            print("ReplayButton not found.")
-        end
-    end
-end
+
 spawn(function()
     while true do
         local moneyValue = checkMoneyValue()
@@ -193,12 +177,7 @@ spawn(function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){255966457793}
     else
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
-        spawn(function()
-            while true do
-                clickReplayButton()
-                wait(0.5)
-            end
-        end)  
+        
     end
 end)
 local timeElapsed = 0
