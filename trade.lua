@@ -265,7 +265,10 @@ until moneyValue ~= -1
 local moneyValue = checkMoneyValue()
 
 if moneyValue == 0 then
-    teleportToTrading()
+    while true do
+        teleportToTrading()
+        wait(waitTime)
+    end
 else
     game:GetService("CoreGui").PlayerList.PlayerListMaster.Visible = false
     local soluongGem = game:GetService("Players").LocalPlayer.leaderstats["\240\159\146\142 Gems"].Value
