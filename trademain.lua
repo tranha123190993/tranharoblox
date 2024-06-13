@@ -1,8 +1,27 @@
-local VirtualInputManager = game:GetService("VirtualInputManager")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local getInventoryRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("GetInventory")
+local HttpService = game:GetService("HttpService")
+local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
+local Mouse = player:GetMouse()
+local promptGui = player.PlayerGui.PromptGui
+local VirtualInputManager = game:GetService("VirtualInputManager")
 local accClone = ""
 local soluongGem = ""
+local gameID = 17017769292
+local data = {}
+local promptOverlay = game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui") and game:GetService("CoreGui").RobloxPromptGui:FindFirstChild("promptOverlay")
+local connection
+
+if promptOverlay then
+    connection = promptOverlay.ChildAdded:Connect(function(child)
+        if child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") and child.MessageArea:FindFirstChild("ErrorFrame") then
+            game:GetService("TeleportService"):Teleport(gameID)
+            connection:Disconnect()
+        end
+    end)
+end
 -- Hàm để click vào vị trí xác định
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
@@ -33,6 +52,85 @@ local function GetCenterPosition(guiElement)
     local centerX = absPos.X + absSize.X / 2
     local centerY = absPos.Y + absSize.Y / 2
     return centerX, centerY
+end
+local function printSpecificValues(key, val)
+    local specificKeys = {
+        ["Trait Crystal"] = true,
+        ["Energy Crystal"] = true,
+        ["Star Rift (Red)"] = true,
+        ["Star Rift (Blue)"] = true,
+        ["Star Rift (Yellow)"] = true,
+        ["Star Rift (Green)"] = true,
+        ["Frost Bind"] = true,
+        ["Risky Dice"] = true,
+        ["Level"] = true,
+        ["Gold"] = true,
+        ["Gems"] = true
+    }
+
+    if specificKeys[key] then
+        if key == "Level" then
+            data["Basic Data"] = data["Basic Data"] or {}
+            data["Basic Data"]["Level"] = val
+        elseif key == "Gold" then
+            data["Basic Data"] = data["Basic Data"] or {}
+            data["Basic Data"]["Fragments"] = val
+        elseif key == "Gems" then
+            data["Basic Data"] = data["Basic Data"] or {}
+        	data["Basic Data"] = data["Basic Data"] or {}
+            	data["Basic Data"]["Beli"] = val
+        elseif key == "Trait Crystal" or key == "Energy Crystal" or key == "Frost Bind" or key == "Risky Dice" or
+               key == "Star Rift (Red)" or key == "Star Rift (Blue)" or key == "Star Rift (Yellow)" or key == "Star Rift (Green)" then
+            data["Items Inventory"] = data["Items Inventory"] or {}
+            data["Items Inventory"][key] = val
+        end
+    end
+end
+local function writeDataToFile()
+    local jsonData = HttpService:JSONEncode(data)
+    local beliValue = checkMoneyValue()
+    local viewportFrame = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.ViewportFrame
+    local worldModel = viewportFrame:WaitForChild("WorldModel")
+
+    if worldModel and worldModel:IsA("Model") and #worldModel:GetChildren() > 0 then
+        -- Lấy con đầu tiên trong WorldModel
+        local firstChild = worldModel:GetChildren()[1]
+    
+        data["Basic Data"]["Fighting Style"] = firstChild.Name
+        data["Basic Data"]["Cost"] = player.PlayerGui.HUD.Toolbar.UnitBar.UnitHolder.UnitGridPrefab.Button.TowerCostFrame.CostLabel.Text
+    else
+        print("Không tìm thấy WorldModel hoặc không có con nào trong đó.")
+    end
+
+    data["Basic Data"]["Race"] = beliValue
+    if not data["Items Inventory"] then
+        data["Items Inventory"] = {""}
+    end
+    data["Fruits Inventory"] = {""}
+
+    local success, errorMessage = pcall(function()
+        writefile(string.format("%sData.json", player.Name), jsonData)
+    end)
+
+    if success then
+        print(string.format("The file with name %sData.json has been written", player.Name))
+    else
+        warn("got error:", errorMessage)
+    end
+end
+
+local function printTable(tbl)
+    for key, val in pairs(tbl) do
+        if type(val) == "table" then
+            if key == "Level" or key == "Currencies" or key == "Items" then
+                printTable(val)
+            else
+                printSpecificValues(key, val)
+            end
+        else
+            printSpecificValues(key, val)
+        end
+    end
 end
 local function ClickFirstItemButtonAndConfirm()
     local scrollingFrame = player.PlayerGui.PAGES.PlayerBoothUI.ItemsGridScrollingFrame
@@ -172,7 +270,18 @@ repeat
     wait(2)
     local moneyValue = checkMoneyValue()
 until moneyValue ~= -1
-
+spawn(function()
+while true do
+        local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
+        if success then
+            printTable(value)
+            writeDataToFile()
+        else
+            warn("Không thể nhận giá trị từ server: " .. tostring(value))
+        end
+        wait(10)
+    end
+end)
 local moneyValue = checkMoneyValue()
 
 if moneyValue == 0 then
