@@ -29,23 +29,6 @@ local function SendCtrlKey()
     wait(0.1)
     VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
 end
-local function clickReplayButton()
-    local matchResultPage = player.PlayerGui.PAGES:FindFirstChild("MatchResultPage")
-    if matchResultPage and matchResultPage.Visible then
-        local replayButton = matchResultPage.Main.Options:FindFirstChild("ReplayButton")
-        if replayButton and replayButton:IsA("ImageButton") then
-            local absPos = replayButton.AbsolutePosition
-            local absSize = replayButton.AbsoluteSize
-            local x, y = absPos.X, absPos.Y
-            local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
-            VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, true, game, 1)
-            wait(0.2) 
-            VirtualInputManager:SendMouseButtonEvent(centerX, centerY, 0, false, game, 1)
-        else
-            print("ReplayButton not found.")
-        end
-    end
-end
 local data = {}
 local function checkMoneyValue()
     local mapBorders = workspace:FindFirstChild("MapBorders")
@@ -216,12 +199,6 @@ spawn(function()
     repeat wait() until game:IsLoaded()
     wait(5)
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){255966457793}
-        spawn(function()
-            while true do
-                clickReplayButton()
-                wait(3)
-            end
-        end)  
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
