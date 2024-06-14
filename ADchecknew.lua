@@ -198,6 +198,7 @@ spawn(function()
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ChangeSetting"):FireServer("Skills Enabled", false)
     repeat wait() until game:IsLoaded()
     wait(5)
+    if isfolder('Luarmor') then delfolder('Luarmor') end
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){255966457793}
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
