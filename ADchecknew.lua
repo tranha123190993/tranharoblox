@@ -144,6 +144,7 @@ spawn(function()
                 "sub2jonaslyz",
                 "sub2riktime",
                 "sub2nagblox",
+                "update2",
                 "release2024"
             }
 
