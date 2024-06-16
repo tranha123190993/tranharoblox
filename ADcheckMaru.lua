@@ -168,7 +168,8 @@ spawn(function()
         repeat wait() until game:IsLoaded()
         wait(5)
         if isfolder('Luarmor') then delfolder('Luarmor') end
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){255966457793}
+        getgenv().key = '255966457793'
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua'))
     else
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
         
