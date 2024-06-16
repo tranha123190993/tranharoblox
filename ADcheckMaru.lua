@@ -133,7 +133,8 @@ spawn(function()
                 "sub2jonaslyz",
                 "sub2riktime",
                 "sub2nagblox",
-                "release2024"
+                "update2",
+                "release2024"   
             }
 
             local remotesFolder = ReplicatedStorage:WaitForChild("Remotes", 5)
