@@ -166,7 +166,10 @@ spawn(function()
     if moneyValue == 0 and level == 1 then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
     elseif moneyValue == 0 and level >= 2 then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
+    repeat wait() until game:IsLoaded()
+    wait(5)
+    getgenv().key = '255966457793'
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua'))()
     else
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tranha123190993/tranharoblox/main/kaitun.lua"))()
         
