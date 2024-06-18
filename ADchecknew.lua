@@ -199,7 +199,8 @@ spawn(function()
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ChangeSetting"):FireServer("Skills Enabled", false)
     repeat wait() until game:IsLoaded()
     wait(5)
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua')){255966457793}
+    getgenv().key = '255966457793'
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Xenon-Trash/Loader/main/Loader.lua'))()
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
         if success then
