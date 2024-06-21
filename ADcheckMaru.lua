@@ -134,6 +134,7 @@ spawn(function()
                 "sub2riktime",
                 "sub2nagblox",
                 "update2",
+                "idk",
                 "release2024"   
             }
 
