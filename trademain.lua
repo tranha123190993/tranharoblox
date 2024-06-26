@@ -232,7 +232,7 @@ local function CheckAndPrintSender()
         local child = RCTScrollContentView:GetChildren()[i]
         if child:IsA("Frame") and child.TextLabel and child.TextLabel.TextMessage then
             local messageText = child.TextLabel.TextMessage.Text
-            local sender, message = messageText:match("%[From (.-)%].-</font>  DG(.+)")
+            local sender, message = messageText:match("%[From (.-)%].-</font>%s*(..)(.*)")
             if sender and message and sender ~= "" and message ~= "" then
                 accClone = sender
                 soluongGem = message
@@ -243,6 +243,7 @@ local function CheckAndPrintSender()
         end
     end
 end
+
 -- Hàm kiểm tra và click vào nút ResponseYes nếu có thông báo
 local function CheckAndClickResponseYes()
     local notificationsHolder = player.PlayerGui:FindFirstChild("UI"):FindFirstChild("NotificationsHolder")
