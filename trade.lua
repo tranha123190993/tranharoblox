@@ -389,7 +389,7 @@ else
     textBox.Text = "DG" .. soluongGem
     local sendButton = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton
     local centerX, centerY = GetCenterPosition(sendButton)
-    ClickAtPosition(centerX - 20, centerY + 40)
+    ClickAtPosition(centerX - 10, centerY + 30)
     wait(5)
     game:GetService("CoreGui").ExperienceChat.appLayout.Visible = false
     spawn(function()
