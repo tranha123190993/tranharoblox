@@ -346,7 +346,7 @@ local function teleportToTrading()
                         local textBox = game:GetService("Players").LocalPlayer.PlayerGui.PromptGui.PromptDefault.Holder.Friend.TextBoxHolder.TextBox
                         textBox.Text = characterName
                         wait(0.5)
-                        ClickAtPosition(X - 10, Y + 30)
+                        ClickAtPosition(X - 20, Y + 40)
                     end
                 end
             end
