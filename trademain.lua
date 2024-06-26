@@ -140,7 +140,7 @@ local function ClickFirstItemButtonAndConfirm()
         local scrollingFrame = child:FindFirstChild("ScrollingFrame")
         if scrollingFrame then
             for _, subChild in ipairs(scrollingFrame:GetChildren()) do
-                if subChild.Name == "UnitGridPrefab" then
+                if subChild.Name == "UnitGridPrefab" and subChild.LayoutOrder == 1 then
                     local centerX, centerY = GetCenterPosition(subChild)
                     ClickAtPosition(centerX - 10, centerY + 30)
                     wait(0.5)
