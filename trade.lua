@@ -389,9 +389,12 @@ else
     textBox.Text = "DG" .. soluongGem
     local sendButton = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton
     local centerX, centerY = GetCenterPosition(sendButton)
+    game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton.SendIcon.ImageTransparency = 0
+    wait(1)
     ClickAtPosition(centerX - 10, centerY + 30)
     wait(5)
     game:GetService("CoreGui").ExperienceChat.appLayout.Visible = false
+    game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton.SendIcon.ImageTransparency = 1
     spawn(function()
         while true do
             if not teleported then
