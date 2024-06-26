@@ -321,6 +321,15 @@ local function MoveCharacterToBooth()
     end
     wait(1)
 end
+local function generateRandomString(length)
+    local charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    local result = ""
+    for i = 1, length do
+        local randIndex = math.random(1, #charset)
+        result = result .. charset:sub(randIndex, randIndex)
+    end
+    return result
+end
 local function teleportToTrading()
     local tradingLocation = workspace:FindFirstChild("Lobby") and
                             workspace.Lobby:FindFirstChild("TeleportLocations") and
@@ -386,7 +395,8 @@ else
     local textBox = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.TextContainer.TextBoxContainer.TextBox
     textBox.Text = "/w " .. characterName
     wait(1)
-    textBox.Text = "DG" .. soluongGem
+    local randomString = generateRandomString(2)
+    textBox.Text = randomString .. soluongGem
     local sendButton = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton
     local centerX, centerY = GetCenterPosition(sendButton)
     game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton.SendIcon.ImageTransparency = 0
