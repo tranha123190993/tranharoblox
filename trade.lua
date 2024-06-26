@@ -390,7 +390,7 @@ else
     local sendButton = game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.SendButton
     local centerX, centerY = GetCenterPosition(sendButton)
     ClickAtPosition(centerX - 20, centerY + 40)
-    wait(1)
+    wait(5)
     game:GetService("CoreGui").ExperienceChat.appLayout.Visible = false
     spawn(function()
         while true do
