@@ -133,35 +133,49 @@ local function printTable(tbl)
     end
 end
 local function ClickFirstItemButtonAndConfirm()
-    local scrollingFrame = player.PlayerGui.PAGES.PlayerBoothUI.ItemsGridScrollingFrame
-    local children = scrollingFrame:GetChildren()
-    local itemButton = nil
-    for _, child in ipairs(children) do
-        if child:FindFirstChild("Button") then
-            itemButton = child:FindFirstChild("Button")
-            break
+    local PromptGui = game.Players.LocalPlayer.PlayerGui.PromptGui
+    local foundMatchingChild = false
+
+    for _, child in ipairs(PromptGui:GetChildren()) do
+        local scrollingFrame = child:FindFirstChild("ScrollingFrame")
+        if scrollingFrame then
+            for _, subChild in ipairs(scrollingFrame:GetChildren()) do
+                if subChild.Name == "UnitGridPrefab" then
+                    local centerX, centerY = GetCenterPosition(subChild)
+                    ClickAtPosition(centerX - 10, centerY + 30)
+                    wait(0.5)
+                    local optionsHolder = child:FindFirstChild("OptionsHolder")
+                    if optionsHolder then
+                        local optionsCenterX, optionsCenterY = GetCenterPosition(optionsHolder)
+                        ClickAtPosition(optionsCenterX - 10, optionsCenterY + 30)
+                    end
+
+                    foundMatchingChild = true
+                    break
+                end
+            end
+
+            if foundMatchingChild then
+                break
+            end
         end
     end
-    if itemButton then
-        local X, Y = GetCenterPosition(itemButton)
-        ClickAtPosition(X - 10, Y + 30)
-        wait(0.5)
-        local ConfirmButton = player.PlayerGui.PAGES.PlayerBoothUI.BottomHolder.ModeHolder.ResponseHolder.ConfirmButton
-        if ConfirmButton then
-            local confirmX, confirmY = GetCenterPosition(ConfirmButton)
-            ClickAtPosition(confirmX - 10, confirmY + 30)
-	    wait(1)
-		local PromptGui = player.PlayerGui.PromptGui
-		local SellTextBox = PromptGui.PromptDefault.Holder.SellTextBox.TextBoxHolder.TextBox
-		SellTextBox.Text = soluongGem
-		soluongGem = ""
-		local SellButtonPath = PromptGui.PromptDefault.Holder.Options.Sell
-		wait(1)
-		local XSell, YSell = GetCenterPosition(SellButtonPath)
-      		ClickAtPosition(XSell - 10, YSell + 30)
+	wait(2)
+    local promptScreenGui = player.PlayerGui:FindFirstChild("PromptGui")
+    if promptScreenGui then
+        local promptDefault = promptScreenGui:FindFirstChild("PromptDefault")
+        if promptDefault then
+	    game:GetService("Players").LocalPlayer.PlayerGui.PromptGui.PromptDefault.Holder.SellTextBox.TextBoxHolder.TextBox.Text = soluongGem
+            local backButton = promptDefault.Holder.Options:FindFirstChild("Sell")
+            if backButton and backButton.Name == "Sell" then
+                local X, Y = GetCenterPosition(backButton)
+                    ClickAtPosition(X - 10, Y + 35)
+                    print("Đã click vào nút Sell")
+            end
         end
     end
 end
+
 local function MoveCharacterToFakeBooth()
     local fxFolder = workspace.FX
     local fxModels = fxFolder:GetChildren()
@@ -187,7 +201,7 @@ local function MoveCharacterToFakeBooth()
     wait(1)
     SendKey(Enum.KeyCode.E, 0.2)
     wait(1)
-    local button = game:GetService("Players").LocalPlayer.PlayerGui.PAGES.PlayerBoothUI.BottomHolder.ModeHolder.ResponseHolder.Button
+    local button = game:GetService("Players").LocalPlayer.PlayerGui.PAGES.PlayerBoothUI.AddButtons.AddUnitsButton
     if button then
     local X, Y = GetCenterPosition(button)
             ClickAtPosition(X - 10, Y + 30)
