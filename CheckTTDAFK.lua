@@ -107,8 +107,8 @@ local function checkMoneyValue()
             end
         end
         wait(2)
-        local buttonPosition = player.PlayerGui:WaitForChild("Lobby"):WaitForChild("readyButton").AbsolutePosition
-        local buttonSize = player.PlayerGui:WaitForChild("Lobby"):WaitForChild("readyButton").AbsoluteSize
+        local buttonPosition = player.PlayerGui:WaitForChild("Lobby"):WaitForChild("ReadyButton").AbsolutePosition
+        local buttonSize = player.PlayerGui:WaitForChild("Lobby"):WaitForChild("ReadyButton").AbsoluteSize
         local centerX = buttonPosition.X + (buttonSize.X / 2)
         local centerY = buttonPosition.Y + (buttonSize.Y / 2) + 35
         ClickAtPosition(centerX, centerY)
