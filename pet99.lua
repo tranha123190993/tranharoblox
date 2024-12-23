@@ -33,6 +33,7 @@ while true do
     data['Basic Data']['Fragments'] = 1
     data['Basic Data']['DevilFruit'] = 1
     data['Basic Data']['Race'] = "None"
+    data['Basic Data']['Bounty/Honor'] = 0
     data['Basic Data']['Fighting Style'] = "Godhuman"
 
     data['Items Inventory'] = {""None""}
