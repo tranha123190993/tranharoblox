@@ -23,8 +23,15 @@
         "error": "Error",
         "success": "Success",
         "warning": "Warning",
-        "info": "Info"
-      },
+               "info": "Info",
+               "home": "Home",
+               "scripts": "Scripts",
+               "urls": "URLs",
+               "largeFiles": "Large Files",
+               "harvest": "Harvest",
+               "licenseManager": "License Manager",
+               "none": "None"
+             },
       "devices": {
         "title": "Devices",
         "deviceSettings": "Device Settings",
@@ -120,8 +127,15 @@
         "error": "Lỗi",
         "success": "Thành công",
         "warning": "Cảnh báo",
-        "info": "Thông tin"
-      },
+               "info": "Thông tin",
+               "home": "Trang chủ",
+               "scripts": "Scripts",
+               "urls": "URLs",
+               "largeFiles": "Files lớn",
+               "harvest": "Harvest",
+               "licenseManager": "Quản lý License",
+               "none": "Không"
+             },
       "devices": {
         "title": "Thiết bị",
         "deviceSettings": "Cài đặt thiết bị",
