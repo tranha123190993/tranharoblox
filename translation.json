@@ -2,461 +2,233 @@
   "version": "1.0.0",
   "lastUpdated": "2025-01-23T00:00:00Z",
   "languages": {
-    "en": {
-      "common": {
-        "save": "Save",
-        "cancel": "Cancel",
-        "delete": "Delete",
-        "edit": "Edit",
-        "add": "Add",
-        "close": "Close",
-        "confirm": "Confirm",
-        "yes": "Yes",
-        "no": "No",
-        "ok": "OK",
-        "apply": "Apply",
-        "reset": "Reset",
-        "search": "Search",
-        "filter": "Filter",
-        "clear": "Clear",
-        "loading": "Loading...",
-        "error": "Error",
-        "success": "Success",
-        "warning": "Warning",
-        "info": "Info",
-        "none": "None",
-        "update": "Update",
-        "create": "Create",
-        "view": "View",
-        "download": "Download",
-        "upload": "Upload",
-        "refresh": "Refresh",
-        "back": "Back",
-        "next": "Next",
-        "previous": "Previous",
-        "submit": "Submit",
-        "select": "Select",
-        "all": "All",
-        "enabled": "Enabled",
-        "disabled": "Disabled"
+    "en": 0,
+    "vi": 1
+  },
+  "common": {
+    "save": ["Save", "Lưu"],
+    "cancel": ["Cancel", "Hủy"],
+    "delete": ["Delete", "Xóa"],
+    "edit": ["Edit", "Sửa"],
+    "add": ["Add", "Thêm"],
+    "close": ["Close", "Đóng"],
+    "confirm": ["Confirm", "Xác nhận"],
+    "yes": ["Yes", "Có"],
+    "no": ["No", "Không"],
+    "ok": ["OK", "OK"],
+    "apply": ["Apply", "Áp dụng"],
+    "reset": ["Reset", "Đặt lại"],
+    "search": ["Search", "Tìm kiếm"],
+    "filter": ["Filter", "Lọc"],
+    "clear": ["Clear", "Xóa"],
+    "loading": ["Loading...", "Đang tải..."],
+    "error": ["Error", "Lỗi"],
+    "success": ["Success", "Thành công"],
+    "warning": ["Warning", "Cảnh báo"],
+    "info": ["Info", "Thông tin"],
+    "none": ["None", "Không"],
+    "update": ["Update", "Cập nhật"],
+    "create": ["Create", "Tạo"],
+    "view": ["View", "Xem"],
+    "download": ["Download", "Tải xuống"],
+    "upload": ["Upload", "Tải lên"],
+    "refresh": ["Refresh", "Làm mới"],
+    "back": ["Back", "Quay lại"],
+    "next": ["Next", "Tiếp theo"],
+    "previous": ["Previous", "Trước đó"],
+    "submit": ["Submit", "Gửi"],
+    "select": ["Select", "Chọn"],
+    "all": ["All", "Tất cả"],
+    "enabled": ["Enabled", "Bật"],
+    "disabled": ["Disabled", "Tắt"]
+  },
+  "pages": {
+    "dashboard": {
+      "title": ["Dashboard", "Bảng điều khiển"],
+      "home": ["Home", "Trang chủ"]
+    },
+    "devices": {
+      "title": ["Devices", "Thiết bị"],
+      "online": ["Online", "Trực tuyến"],
+      "offline": ["Offline", "Ngoại tuyến"],
+      "connecting": ["Connecting to server...", "Đang kết nối đến server..."],
+      "connected": ["Connected", "Đã kết nối"],
+      "disconnected": ["Disconnected", "Đã ngắt kết nối"],
+      "deviceSettings": ["Device Settings", "Cài đặt thiết bị"],
+      "gameSettings": ["Game Settings", "Cài đặt game"],
+      "utilities": ["Utilities", "Tiện ích"],
+      "noDevices": ["No devices found", "Không tìm thấy thiết bị"],
+      "selectDevice": ["Select device", "Chọn thiết bị"],
+      "allDevices": ["All Devices", "Tất cả Thiết bị"]
+    },
+    "cloneAccounts": {
+      "title": ["Clone Accounts", "Clone Tài khoản"],
+      "cloneSettings": ["Clone Settings", "Cài đặt Clone"],
+      "uploadAccountsFile": ["Upload Accounts File", "Tải lên File Tài khoản"],
+      "uploadedFiles": ["Uploaded Files", "Files đã tải lên"],
+      "distributionHistory": ["Distribution History", "Lịch sử Phân phối"],
+      "addProfile": ["Add Profile", "Thêm Profile"],
+      "editProfile": ["Edit Profile", "Sửa Profile"],
+      "deleteProfile": ["Delete Profile", "Xóa Profile"],
+      "profileName": ["Profile Name", "Tên Profile"],
+      "priority": ["Priority", "Ưu tiên"],
+      "selectedFile": ["Selected File", "File đã chọn"],
+      "selectedGame": ["Selected Game", "Game đã chọn"],
+      "tags": ["Tags", "Tags"],
+      "threshold": ["Threshold", "Ngưỡng"],
+      "permanent": ["Permanent", "Vĩnh viễn"],
+      "format": ["Format: User:Password:Cookie or User|Password/Cookie", "Định dạng: User:Password:Cookie hoặc User|Password/Cookie"],
+      "noFilesUploaded": ["No files uploaded yet", "Chưa có file nào được tải lên"],
+      "noProfilesConfigured": ["No profiles configured", "Chưa có profile nào được cấu hình"],
+      "addFirstProfile": ["Add Your First Profile", "Thêm Profile Đầu tiên"],
+      "duplicateError": ["Duplicate/Error", "Trùng lặp/Lỗi"],
+      "remaining": ["remaining", "còn lại"],
+      "selectDate": ["Select date", "Chọn ngày"],
+      "clearFilters": ["Clear Filters", "Xóa Bộ lọc"],
+      "totalAccounts": ["Total: {count} accounts", "Tổng: {count} tài khoản"],
+      "viewTotal": ["View Total", "Xem Tổng"],
+      "noDistributionHistory": ["No distribution history found", "Không tìm thấy lịch sử phân phối"]
+    },
+    "scripts": {
+      "title": ["Scripts", "Scripts"],
+      "noScripts": ["No scripts found", "Không tìm thấy scripts"],
+      "uploadScript": ["Upload Script", "Tải lên Script"],
+      "scriptName": ["Script Name", "Tên Script"],
+      "scriptContent": ["Script Content", "Nội dung Script"]
+    },
+    "urls": {
+      "title": ["URLs", "URLs"],
+      "noUrls": ["No URLs found", "Không tìm thấy URLs"],
+      "addUrl": ["Add URL", "Thêm URL"],
+      "url": ["URL", "URL"],
+      "description": ["Description", "Mô tả"]
+    },
+    "largeFiles": {
+      "title": ["Large Files", "Files lớn"],
+      "noFiles": ["No files found", "Không tìm thấy files"],
+      "uploadFile": ["Upload File", "Tải lên File"],
+      "fileName": ["File Name", "Tên File"],
+      "fileSize": ["File Size", "Kích thước File"]
+    },
+    "harvest": {
+      "title": ["Harvest", "Harvest"],
+      "harvestAccounts": ["Harvest Accounts", "Thu thập Tài khoản"],
+      "filterAccounts": ["Filter Accounts", "Lọc Tài khoản"],
+      "harvestHistory": ["Harvest History", "Lịch sử Thu thập"],
+      "selectFile": ["Select File", "Chọn File"],
+      "selectGame": ["Select Game", "Chọn Game"],
+      "selectTags": ["Select Tags", "Chọn Tags"],
+      "startHarvest": ["Start Harvest", "Bắt đầu Thu thập"],
+      "noHistory": ["No harvest history found", "Không tìm thấy lịch sử thu thập"]
+    },
+    "licenseManager": {
+      "title": ["License Manager", "Quản lý License"],
+      "hwid": ["HWID", "HWID"],
+      "copyHwid": ["Copy HWID", "Sao chép HWID"],
+      "generateHash": ["Generate Hash", "Tạo Hash"],
+      "viewHwid": ["View HWID", "Xem HWID"],
+      "noLicenses": ["No licenses found", "Không tìm thấy licenses"]
+    },
+    "settings": {
+      "title": ["Settings", "Cài đặt"],
+      "userSettings": ["User Settings", "Cài đặt Người dùng"],
+      "adminSettings": ["Admin Settings", "Cài đặt Admin"],
+      "pathConfig": ["Path Config", "Đường dẫn Config"],
+      "formatConfig": ["Format Config", "Định dạng Config"],
+      "prefix": ["Prefix", "Tiền tố"],
+      "suffix": ["Suffix", "Hậu tố"],
+      "extension": ["Extension", "Phần mở rộng"],
+      "account": ["Account", "Tài khoản"],
+      "username": ["Username", "Tên người dùng"],
+      "configJson": ["config.json", "config.json"],
+      "openFile": ["Open File", "Mở File"],
+      "editConfigJson": ["Edit config.json", "Sửa config.json"],
+      "fps": ["FPS", "FPS"],
+      "ram": ["RAM", "RAM"],
+      "placeId": ["Place ID", "Place ID"],
+      "pathExecutor": ["Path Executor", "Đường dẫn Executor"]
+    },
+    "admin": {
+      "title": ["Admin", "Admin"],
+      "overview": ["Overview", "Tổng quan"],
+      "users": ["Users", "Người dùng"],
+      "harvest": ["Harvest", "Harvest"],
+      "cropsAnalytics": ["Crops Analytics", "Phân tích Mùa vụ"],
+      "stores": ["Stores", "Cửa hàng"],
+      "userManagement": ["User Management", "Quản lý Người dùng"],
+      "harvestManagement": ["Harvest Management", "Quản lý Harvest"]
+    },
+    "superAdmin": {
+      "title": ["Super Admin", "Super Admin"],
+      "dashboard": ["Dashboard", "Bảng điều khiển"],
+      "accountImport": ["Account Import", "Nhập Tài khoản"],
+      "accountTypeInfo": ["Account Type Info", "Thông tin Loại Tài khoản"],
+      "apiKeyManagement": ["API Key Management", "Quản lý API Key"],
+      "harvestedAccounts": ["Harvested Accounts", "Tài khoản đã Thu thập"],
+      "importLogs": ["Import Logs", "Nhật ký Nhập"],
+      "templateManager": ["Template Manager", "Quản lý Template"]
+    },
+    "auth": {
+      "title": ["Login", "Đăng nhập"],
+      "email": ["Email", "Email"],
+      "password": ["Password", "Mật khẩu"],
+      "login": ["Login", "Đăng nhập"],
+      "logout": ["Logout", "Đăng xuất"],
+      "rememberMe": ["Remember Me", "Ghi nhớ đăng nhập"],
+      "forgotPassword": ["Forgot Password", "Quên mật khẩu"]
+    }
+  },
+  "components": {
+    "modals": {
+      "settingModal": {
+        "deviceSettings": ["Device Settings", "Cài đặt thiết bị"],
+        "gameSettings": ["Game Settings", "Cài đặt game"],
+        "utilities": ["Utilities", "Tiện ích"],
+        "save": ["Save", "Lưu"],
+        "cancel": ["Cancel", "Hủy"],
+        "apply": ["Apply", "Áp dụng"],
+        "exportToTemplate": ["Export to Template", "Xuất ra Template"],
+        "importFromTemplate": ["Import from Template", "Nhập từ Template"]
       },
-      "pages": {
-        "dashboard": {
-          "title": "Dashboard",
-          "home": "Home"
-        },
-        "devices": {
-          "title": "Devices",
-          "online": "Online",
-          "offline": "Offline",
-          "connecting": "Connecting to server...",
-          "connected": "Connected",
-          "disconnected": "Disconnected",
-          "deviceSettings": "Device Settings",
-          "gameSettings": "Game Settings",
-          "utilities": "Utilities",
-          "noDevices": "No devices found",
-          "selectDevice": "Select device",
-          "allDevices": "All Devices"
-        },
-        "cloneAccounts": {
-          "title": "Clone Accounts",
-          "cloneSettings": "Clone Settings",
-          "uploadAccountsFile": "Upload Accounts File",
-          "uploadedFiles": "Uploaded Files",
-          "distributionHistory": "Distribution History",
-          "addProfile": "Add Profile",
-          "editProfile": "Edit Profile",
-          "deleteProfile": "Delete Profile",
-          "profileName": "Profile Name",
-          "priority": "Priority",
-          "selectedFile": "Selected File",
-          "selectedGame": "Selected Game",
-          "tags": "Tags",
-          "threshold": "Threshold",
-          "permanent": "Permanent",
-          "format": "Format: User:Password:Cookie or User|Password/Cookie",
-          "noFilesUploaded": "No files uploaded yet",
-          "noProfilesConfigured": "No profiles configured",
-          "addFirstProfile": "Add Your First Profile",
-          "duplicateError": "Duplicate/Error",
-          "remaining": "remaining",
-          "selectDate": "Select date",
-          "clearFilters": "Clear Filters",
-          "totalAccounts": "Total: {count} accounts",
-          "viewTotal": "View Total",
-          "noDistributionHistory": "No distribution history found"
-        },
-        "scripts": {
-          "title": "Scripts",
-          "noScripts": "No scripts found",
-          "uploadScript": "Upload Script",
-          "scriptName": "Script Name",
-          "scriptContent": "Script Content"
-        },
-        "urls": {
-          "title": "URLs",
-          "noUrls": "No URLs found",
-          "addUrl": "Add URL",
-          "url": "URL",
-          "description": "Description"
-        },
-        "largeFiles": {
-          "title": "Large Files",
-          "noFiles": "No files found",
-          "uploadFile": "Upload File",
-          "fileName": "File Name",
-          "fileSize": "File Size"
-        },
-        "harvest": {
-          "title": "Harvest",
-          "harvestAccounts": "Harvest Accounts",
-          "filterAccounts": "Filter Accounts",
-          "harvestHistory": "Harvest History",
-          "selectFile": "Select File",
-          "selectGame": "Select Game",
-          "selectTags": "Select Tags",
-          "startHarvest": "Start Harvest",
-          "noHistory": "No harvest history found"
-        },
-        "licenseManager": {
-          "title": "License Manager",
-          "hwid": "HWID",
-          "copyHwid": "Copy HWID",
-          "generateHash": "Generate Hash",
-          "viewHwid": "View HWID",
-          "noLicenses": "No licenses found"
-        },
-        "settings": {
-          "title": "Settings",
-          "userSettings": "User Settings",
-          "adminSettings": "Admin Settings",
-          "pathConfig": "Path Config",
-          "formatConfig": "Format Config",
-          "prefix": "Prefix",
-          "suffix": "Suffix",
-          "extension": "Extension",
-          "account": "Account",
-          "username": "Username",
-          "configJson": "config.json",
-          "openFile": "Open File",
-          "editConfigJson": "Edit config.json",
-          "fps": "FPS",
-          "ram": "RAM",
-          "placeId": "Place ID",
-          "pathExecutor": "Path Executor"
-        },
-        "admin": {
-          "title": "Admin",
-          "overview": "Overview",
-          "users": "Users",
-          "harvest": "Harvest",
-          "cropsAnalytics": "Crops Analytics",
-          "stores": "Stores",
-          "userManagement": "User Management",
-          "harvestManagement": "Harvest Management"
-        },
-        "superAdmin": {
-          "title": "Super Admin",
-          "dashboard": "Dashboard",
-          "accountImport": "Account Import",
-          "accountTypeInfo": "Account Type Info",
-          "apiKeyManagement": "API Key Management",
-          "harvestedAccounts": "Harvested Accounts",
-          "importLogs": "Import Logs",
-          "templateManager": "Template Manager"
-        },
-        "auth": {
-          "title": "Login",
-          "email": "Email",
-          "password": "Password",
-          "login": "Login",
-          "logout": "Logout",
-          "rememberMe": "Remember Me",
-          "forgotPassword": "Forgot Password"
-        }
+      "settingsAllModal": {
+        "applyToAll": ["Apply to All Devices", "Áp dụng cho Tất cả Thiết bị"],
+        "selectDevices": ["Select Devices", "Chọn Thiết bị"],
+        "apply": ["Apply", "Áp dụng"],
+        "cancel": ["Cancel", "Hủy"]
       },
-      "components": {
-        "modals": {
-          "settingModal": {
-            "deviceSettings": "Device Settings",
-            "gameSettings": "Game Settings",
-            "utilities": "Utilities",
-            "save": "Save",
-            "cancel": "Cancel",
-            "apply": "Apply",
-            "exportToTemplate": "Export to Template",
-            "importFromTemplate": "Import from Template"
-          },
-          "settingsAllModal": {
-            "applyToAll": "Apply to All Devices",
-            "selectDevices": "Select Devices",
-            "apply": "Apply",
-            "cancel": "Cancel"
-          },
-          "fileModal": {
-            "editFile": "Edit File",
-            "save": "Save",
-            "cancel": "Cancel",
-            "apply": "Apply"
-          }
-        },
-        "deviceCard": {
-          "online": "Online",
-          "offline": "Offline",
-          "settings": "Settings",
-          "viewDetails": "View Details"
-        },
-        "deviceHeader": {
-          "selectAll": "Select All",
-          "deselectAll": "Deselect All",
-          "bulkActions": "Bulk Actions"
-        }
-      },
-      "messages": {
-        "deleteConfirm": "Delete this {item}?",
-        "deleteDescription": "This action cannot be undone.",
-        "fileDeleted": "File deleted successfully",
-        "deleteFailed": "Delete failed: {error}",
-        "saveSuccess": "Saved successfully",
-        "saveFailed": "Save failed: {error}",
-        "uploadSuccess": "Upload successful",
-        "uploadFailed": "Upload failed: {error}",
-        "invalidInput": "Invalid input",
-        "requiredField": "This field is required",
-        "operationSuccess": "Operation completed successfully",
-        "operationFailed": "Operation failed: {error}",
-        "confirmAction": "Are you sure you want to {action}?",
-        "noData": "No data available"
+      "fileModal": {
+        "editFile": ["Edit File", "Sửa File"],
+        "save": ["Save", "Lưu"],
+        "cancel": ["Cancel", "Hủy"],
+        "apply": ["Apply", "Áp dụng"]
       }
     },
-    "vi": {
-      "common": {
-        "save": "Lưu",
-        "cancel": "Hủy",
-        "delete": "Xóa",
-        "edit": "Sửa",
-        "add": "Thêm",
-        "close": "Đóng",
-        "confirm": "Xác nhận",
-        "yes": "Có",
-        "no": "Không",
-        "ok": "OK",
-        "apply": "Áp dụng",
-        "reset": "Đặt lại",
-        "search": "Tìm kiếm",
-        "filter": "Lọc",
-        "clear": "Xóa",
-        "loading": "Đang tải...",
-        "error": "Lỗi",
-        "success": "Thành công",
-        "warning": "Cảnh báo",
-        "info": "Thông tin",
-        "none": "Không",
-        "update": "Cập nhật",
-        "create": "Tạo",
-        "view": "Xem",
-        "download": "Tải xuống",
-        "upload": "Tải lên",
-        "refresh": "Làm mới",
-        "back": "Quay lại",
-        "next": "Tiếp theo",
-        "previous": "Trước đó",
-        "submit": "Gửi",
-        "select": "Chọn",
-        "all": "Tất cả",
-        "enabled": "Bật",
-        "disabled": "Tắt"
-      },
-      "pages": {
-        "dashboard": {
-          "title": "Bảng điều khiển",
-          "home": "Trang chủ"
-        },
-        "devices": {
-          "title": "Thiết bị",
-          "online": "Trực tuyến",
-          "offline": "Ngoại tuyến",
-          "connecting": "Đang kết nối đến server...",
-          "connected": "Đã kết nối",
-          "disconnected": "Đã ngắt kết nối",
-          "deviceSettings": "Cài đặt thiết bị",
-          "gameSettings": "Cài đặt game",
-          "utilities": "Tiện ích",
-          "noDevices": "Không tìm thấy thiết bị",
-          "selectDevice": "Chọn thiết bị",
-          "allDevices": "Tất cả Thiết bị"
-        },
-        "cloneAccounts": {
-          "title": "Clone Tài khoản",
-          "cloneSettings": "Cài đặt Clone",
-          "uploadAccountsFile": "Tải lên File Tài khoản",
-          "uploadedFiles": "Files đã tải lên",
-          "distributionHistory": "Lịch sử Phân phối",
-          "addProfile": "Thêm Profile",
-          "editProfile": "Sửa Profile",
-          "deleteProfile": "Xóa Profile",
-          "profileName": "Tên Profile",
-          "priority": "Ưu tiên",
-          "selectedFile": "File đã chọn",
-          "selectedGame": "Game đã chọn",
-          "tags": "Tags",
-          "threshold": "Ngưỡng",
-          "permanent": "Vĩnh viễn",
-          "format": "Định dạng: User:Password:Cookie hoặc User|Password/Cookie",
-          "noFilesUploaded": "Chưa có file nào được tải lên",
-          "noProfilesConfigured": "Chưa có profile nào được cấu hình",
-          "addFirstProfile": "Thêm Profile Đầu tiên",
-          "duplicateError": "Trùng lặp/Lỗi",
-          "remaining": "còn lại",
-          "selectDate": "Chọn ngày",
-          "clearFilters": "Xóa Bộ lọc",
-          "totalAccounts": "Tổng: {count} tài khoản",
-          "viewTotal": "Xem Tổng",
-          "noDistributionHistory": "Không tìm thấy lịch sử phân phối"
-        },
-        "scripts": {
-          "title": "Scripts",
-          "noScripts": "Không tìm thấy scripts",
-          "uploadScript": "Tải lên Script",
-          "scriptName": "Tên Script",
-          "scriptContent": "Nội dung Script"
-        },
-        "urls": {
-          "title": "URLs",
-          "noUrls": "Không tìm thấy URLs",
-          "addUrl": "Thêm URL",
-          "url": "URL",
-          "description": "Mô tả"
-        },
-        "largeFiles": {
-          "title": "Files lớn",
-          "noFiles": "Không tìm thấy files",
-          "uploadFile": "Tải lên File",
-          "fileName": "Tên File",
-          "fileSize": "Kích thước File"
-        },
-        "harvest": {
-          "title": "Harvest",
-          "harvestAccounts": "Thu thập Tài khoản",
-          "filterAccounts": "Lọc Tài khoản",
-          "harvestHistory": "Lịch sử Thu thập",
-          "selectFile": "Chọn File",
-          "selectGame": "Chọn Game",
-          "selectTags": "Chọn Tags",
-          "startHarvest": "Bắt đầu Thu thập",
-          "noHistory": "Không tìm thấy lịch sử thu thập"
-        },
-        "licenseManager": {
-          "title": "Quản lý License",
-          "hwid": "HWID",
-          "copyHwid": "Sao chép HWID",
-          "generateHash": "Tạo Hash",
-          "viewHwid": "Xem HWID",
-          "noLicenses": "Không tìm thấy licenses"
-        },
-        "settings": {
-          "title": "Cài đặt",
-          "userSettings": "Cài đặt Người dùng",
-          "adminSettings": "Cài đặt Admin",
-          "pathConfig": "Đường dẫn Config",
-          "formatConfig": "Định dạng Config",
-          "prefix": "Tiền tố",
-          "suffix": "Hậu tố",
-          "extension": "Phần mở rộng",
-          "account": "Tài khoản",
-          "username": "Tên người dùng",
-          "configJson": "config.json",
-          "openFile": "Mở File",
-          "editConfigJson": "Sửa config.json",
-          "fps": "FPS",
-          "ram": "RAM",
-          "placeId": "Place ID",
-          "pathExecutor": "Đường dẫn Executor"
-        },
-        "admin": {
-          "title": "Admin",
-          "overview": "Tổng quan",
-          "users": "Người dùng",
-          "harvest": "Harvest",
-          "cropsAnalytics": "Phân tích Mùa vụ",
-          "stores": "Cửa hàng",
-          "userManagement": "Quản lý Người dùng",
-          "harvestManagement": "Quản lý Harvest"
-        },
-        "superAdmin": {
-          "title": "Super Admin",
-          "dashboard": "Bảng điều khiển",
-          "accountImport": "Nhập Tài khoản",
-          "accountTypeInfo": "Thông tin Loại Tài khoản",
-          "apiKeyManagement": "Quản lý API Key",
-          "harvestedAccounts": "Tài khoản đã Thu thập",
-          "importLogs": "Nhật ký Nhập",
-          "templateManager": "Quản lý Template"
-        },
-        "auth": {
-          "title": "Đăng nhập",
-          "email": "Email",
-          "password": "Mật khẩu",
-          "login": "Đăng nhập",
-          "logout": "Đăng xuất",
-          "rememberMe": "Ghi nhớ đăng nhập",
-          "forgotPassword": "Quên mật khẩu"
-        }
-      },
-      "components": {
-        "modals": {
-          "settingModal": {
-            "deviceSettings": "Cài đặt thiết bị",
-            "gameSettings": "Cài đặt game",
-            "utilities": "Tiện ích",
-            "save": "Lưu",
-            "cancel": "Hủy",
-            "apply": "Áp dụng",
-            "exportToTemplate": "Xuất ra Template",
-            "importFromTemplate": "Nhập từ Template"
-          },
-          "settingsAllModal": {
-            "applyToAll": "Áp dụng cho Tất cả Thiết bị",
-            "selectDevices": "Chọn Thiết bị",
-            "apply": "Áp dụng",
-            "cancel": "Hủy"
-          },
-          "fileModal": {
-            "editFile": "Sửa File",
-            "save": "Lưu",
-            "cancel": "Hủy",
-            "apply": "Áp dụng"
-          }
-        },
-        "deviceCard": {
-          "online": "Trực tuyến",
-          "offline": "Ngoại tuyến",
-          "settings": "Cài đặt",
-          "viewDetails": "Xem Chi tiết"
-        },
-        "deviceHeader": {
-          "selectAll": "Chọn Tất cả",
-          "deselectAll": "Bỏ chọn Tất cả",
-          "bulkActions": "Thao tác Hàng loạt"
-        }
-      },
-      "messages": {
-        "deleteConfirm": "Xóa {item} này?",
-        "deleteDescription": "Hành động này không thể hoàn tác.",
-        "fileDeleted": "Xóa file thành công",
-        "deleteFailed": "Xóa thất bại: {error}",
-        "saveSuccess": "Lưu thành công",
-        "saveFailed": "Lưu thất bại: {error}",
-        "uploadSuccess": "Tải lên thành công",
-        "uploadFailed": "Tải lên thất bại: {error}",
-        "invalidInput": "Dữ liệu không hợp lệ",
-        "requiredField": "Trường này là bắt buộc",
-        "operationSuccess": "Thao tác hoàn tất thành công",
-        "operationFailed": "Thao tác thất bại: {error}",
-        "confirmAction": "Bạn có chắc chắn muốn {action}?",
-        "noData": "Không có dữ liệu"
-      }
+    "deviceCard": {
+      "online": ["Online", "Trực tuyến"],
+      "offline": ["Offline", "Ngoại tuyến"],
+      "settings": ["Settings", "Cài đặt"],
+      "viewDetails": ["View Details", "Xem Chi tiết"]
+    },
+    "deviceHeader": {
+      "selectAll": ["Select All", "Chọn Tất cả"],
+      "deselectAll": ["Deselect All", "Bỏ chọn Tất cả"],
+      "bulkActions": ["Bulk Actions", "Thao tác Hàng loạt"]
     }
+  },
+  "messages": {
+    "deleteConfirm": ["Delete this {item}?", "Xóa {item} này?"],
+    "deleteDescription": ["This action cannot be undone.", "Hành động này không thể hoàn tác."],
+    "fileDeleted": ["File deleted successfully", "Xóa file thành công"],
+    "deleteFailed": ["Delete failed: {error}", "Xóa thất bại: {error}"],
+    "saveSuccess": ["Saved successfully", "Lưu thành công"],
+    "saveFailed": ["Save failed: {error}", "Lưu thất bại: {error}"],
+    "uploadSuccess": ["Upload successful", "Tải lên thành công"],
+    "uploadFailed": ["Upload failed: {error}", "Tải lên thất bại: {error}"],
+    "invalidInput": ["Invalid input", "Dữ liệu không hợp lệ"],
+    "requiredField": ["This field is required", "Trường này là bắt buộc"],
+    "operationSuccess": ["Operation completed successfully", "Thao tác hoàn tất thành công"],
+    "operationFailed": ["Operation failed: {error}", "Thao tác thất bại: {error}"],
+    "confirmAction": ["Are you sure you want to {action}?", "Bạn có chắc chắn muốn {action}?"],
+    "noData": ["No data available", "Không có dữ liệu"]
   }
 }
