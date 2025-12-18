@@ -70,5 +70,9 @@
   {
     "value": "https://plants-vs-brainrots.fandom.com/api.php",
     "label": "Plants Vs Brainrots"
+  },
+  {
+    "value": "https://murder-mystery-2.fandom.com/api.php",
+    "label": "Murder Mystery 2"
   }
 ]
