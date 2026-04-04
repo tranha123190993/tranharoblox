@@ -12,7 +12,7 @@ if _G.BRIDGE_LOCAL_WS_REF then
 end
 
 local BRIDGE_PORT = getgenv().BRIDGE_PORT or 9993
-local PROFILE_INDEX = getgenv().PROFILE_INDEX or 0
+local PROFILE_INDEX = getgenv().PROFILE_INDEX -- nil if not set (server resolves by player name)
 local BRIDGE_WS = "ws://localhost:" .. tostring(BRIDGE_PORT)
 local BRIDGE_HTTP = "http://localhost:" .. tostring(BRIDGE_PORT)
 local POLL_INTERVAL = 2
@@ -122,7 +122,8 @@ local function tryWebSocket()
 
     if not wsConnect then return false end
 
-    local wsUrl = BRIDGE_WS .. "?profileIndex=" .. tostring(PROFILE_INDEX)
+    local wsUrl = BRIDGE_WS
+    if PROFILE_INDEX then wsUrl = wsUrl .. "?profileIndex=" .. tostring(PROFILE_INDEX) end
     local ok, ws = pcall(wsConnect, wsUrl)
     if not ok or not ws then isWsActive = false return false end
     _G.BRIDGE_LOCAL_WS_REF = ws
@@ -131,7 +132,7 @@ local function tryWebSocket()
 
     wsSendFunc, isWsActive = wsSend, true
     wsSend({ type = "register", profileIndex = PROFILE_INDEX, info = deviceInfo })
-    wsSend({ type = "log", message = "Bridge Local started WS. Player: " .. LocalPlayer.Name .. " | Profile: " .. tostring(PROFILE_INDEX) .. " | Executor: " .. getExecutorName() })
+    wsSend({ type = "log", message = "Bridge Local started WS. Player: " .. LocalPlayer.Name .. " | Executor: " .. getExecutorName() })
 
     ws.OnMessage:Connect(function(raw)
         if not isAlive() then pcall(function() ws:Close() end) return end
