@@ -21,7 +21,7 @@ repeat task.wait() until game:IsLoaded()
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local LocalPlayer = Players.LocalPlayer
-repeat task.wait() until LocalPlayer and LocalPlayer.Character
+repeat task.wait() until LocalPlayer
 
 local httpRequest = (function()
     if syn and syn.request then return syn.request end
