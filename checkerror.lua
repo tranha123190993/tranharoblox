@@ -37,11 +37,7 @@ local function HandleErrorPrompt()
                 reconnectBtnObj = desc
             end
 
-            local hasText = pcall(function()
-                return desc.Text
-            end)
-
-            if hasText and desc.Text and desc.Text:lower():match("leave") then
+            if desc.Name:lower():match("leave") then
                 leaveBtnObj = desc
             end
         end
