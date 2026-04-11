@@ -31,11 +31,17 @@ local function HandleErrorPrompt()
         if desc:IsA("TextLabel") and desc.Visible and desc.Text then
             fullText = fullText .. " " .. desc.Text:lower()
         end
+
         if desc:IsA("GuiButton") and desc.Visible then
             if desc.Name:match("Reconnect") then
                 reconnectBtnObj = desc
             end
-            if desc.Text and desc.Text:lower():match("leave") then
+
+            local hasText = pcall(function()
+                return desc.Text
+            end)
+
+            if hasText and desc.Text and desc.Text:lower():match("leave") then
                 leaveBtnObj = desc
             end
         end
