@@ -51,10 +51,12 @@ local function HandleErrorPrompt()
 
     local errorState = nil
 
-    if fullText:match("ban ") or fullText:match("banned") or fullText:match("permanent") or codeNum == "273" or fullText:match("same account") then
+    -- if fullText:match("ban ") or fullText:match("banned") or fullText:match("permanent") or codeNum == "273" or fullText:match("same account") then
+       -- errorState = "banned"
+    -- end
+    if fullText:match("ban ") or fullText:match("banned") or fullText:match("permanent") then
         errorState = "banned"
     end
-
     if errorState then
         if not hasWrittenError then
             local player = Players.LocalPlayer
