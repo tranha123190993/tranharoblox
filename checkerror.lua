@@ -91,7 +91,7 @@ local function HandleErrorPrompt()
                 pcall(function()
                     writefile(
                         string.format("%sError.json", player.Name),
-                        HttpService:JSONEncode({ State = errorState, Code = codeNum or "unknown" })
+                        HttpService:JSONEncode({ State = errorState })
                     )
                 end)
                 hasWrittenError = true
