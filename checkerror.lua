@@ -1,7 +1,28 @@
 local coreGui = game:GetService("CoreGui")
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
-local hasWrittenError = false 
+local hasWrittenError = false
+
+local RECONNECT_KW = {"reconnect", "verbinden", "reconectar", "переподключиться", "kết nối lại"}
+local LEAVE_KW = {"leave", "verlassen", "sair", "salir", "quitter", "выйти", "keluar", "thoát"}
+local BAN_CODES = {["273"] = true, ["148"] = true, ["6"] = true}
+local BAN_KEYWORDS = {
+    "ban", "banned", "permanent", "suspended",
+    "cấm", "khóa", "vĩnh viễn",
+    "banido", "banimento", "suspenso",
+    "baneado", "prohibido", "suspendido",
+    "banni", "interdiction", "suspendu",
+    "gesperrt", "verbannt", "dauerhaft",
+    "заблокирован", "бан",
+    "dilarang", "permanen"
+}
+
+local function matchAny(str, list)
+    for _, kw in ipairs(list) do
+        if str:find(kw, 1, true) then return true end
+    end
+    return false
+end
 
 local function UltimateKeyboardClick(btn)
     pcall(function()
@@ -31,40 +52,49 @@ local function HandleErrorPrompt()
         if desc:IsA("TextLabel") and desc.Visible and desc.Text then
             fullText = fullText .. " " .. desc.Text:lower()
         end
-
         if desc:IsA("GuiButton") and desc.Visible then
-            if desc.Name:match("Reconnect") then
-                reconnectBtnObj = desc
+            local nameStr = desc.Name:lower()
+            local textStr = ""
+            if desc:IsA("TextButton") then
+                textStr = desc.Text:lower()
+            else
+                local lbl = desc:FindFirstChildWhichIsA("TextLabel")
+                if lbl then textStr = lbl.Text:lower() end
             end
 
-            if desc.Name:lower():match("leave") then
+            if matchAny(nameStr, RECONNECT_KW) or matchAny(textStr, RECONNECT_KW) then
+                reconnectBtnObj = desc
+            end
+            if matchAny(nameStr, LEAVE_KW) or matchAny(textStr, LEAVE_KW) then
                 leaveBtnObj = desc
             end
         end
     end
 
     local codeNum = fullText:match("error code: (%d+)")
-    if not codeNum then
-        local codeBracket = fullText:match("%(([^%)]+%d+)%)")
-        if codeBracket then codeNum = codeBracket:match("(%d+)") end
-    end
+                 or fullText:match("code: (%d+)")
+                 or fullText:match("fehlercode: (%d+)")
+                 or fullText:match("%((%d+)%)")
 
     local errorState = nil
 
-    -- if fullText:match("ban ") or fullText:match("banned") or fullText:match("permanent") or codeNum == "273" or fullText:match("same account") then
-       -- errorState = "banned"
-    -- end
-    if fullText:match("ban ") or fullText:match("banned") or fullText:match("permanent") then
+    if codeNum and BAN_CODES[codeNum] then
+        errorState = "banned"
+    elseif matchAny(fullText, BAN_KEYWORDS) then
         errorState = "banned"
     end
+
     if errorState then
         if not hasWrittenError then
             local player = Players.LocalPlayer
             if player then
                 pcall(function()
-                    writefile(string.format("%sError.json", player.Name), HttpService:JSONEncode({ State = errorState }))
+                    writefile(
+                        string.format("%sError.json", player.Name),
+                        HttpService:JSONEncode({ State = errorState, Code = codeNum or "unknown" })
+                    )
                 end)
-                hasWrittenError = true 
+                hasWrittenError = true
             end
         end
         return true
@@ -72,14 +102,13 @@ local function HandleErrorPrompt()
 
     if reconnectBtnObj then
         UltimateKeyboardClick(reconnectBtnObj)
-        return true 
+        return true
     end
-
     if leaveBtnObj then
         UltimateKeyboardClick(leaveBtnObj)
         return true
     end
-    
+
     return false
 end
 
