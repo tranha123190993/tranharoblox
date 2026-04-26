@@ -5,7 +5,7 @@ local hasWrittenError = false
 
 local RECONNECT_KW = {"reconnect", "verbinden", "reconectar", "переподключиться", "kết nối lại"}
 local LEAVE_KW = {"leave", "verlassen", "sair", "salir", "quitter", "выйти", "keluar", "thoát"}
-local BAN_CODES = {["273"] = true, ["148"] = true, ["6"] = true}
+local BAN_CODES = {["148"] = true, ["6"] = true}
 local BAN_KEYWORDS = {
     "ban", "banned", "permanent", "suspended",
     "cấm", "khóa", "vĩnh viễn",
