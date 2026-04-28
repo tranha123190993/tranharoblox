@@ -25,9 +25,9 @@ local BAN_KEYWORDS = {
 }
 
 local REJOIN_KEYWORDS = {
-    "kick", "kicked", "disconnected",
-    "lost connection", "connection lost",
-    "bị kick", "mất kết nối"
+    --"kick", "kicked", "disconnected",
+    --"lost connection", "connection lost",
+    --"bị kick", "mất kết nối"
 }
 
 local function matchAny(str, list)
