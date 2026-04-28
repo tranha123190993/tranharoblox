@@ -1,11 +1,18 @@
 local coreGui = game:GetService("CoreGui")
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
+
 local hasWrittenError = false
+local rejoinAttempts = 0
+local MAX_REJOIN_ATTEMPTS = 5
 
 local RECONNECT_KW = {"reconnect", "verbinden", "reconectar", "переподключиться", "kết nối lại"}
 local LEAVE_KW = {"leave", "verlassen", "sair", "salir", "quitter", "выйти", "keluar", "rời khỏi"}
+
 local BAN_CODES = {["148"] = true, ["6"] = true}
+
+local REJOIN_CODES = {["267"] = true, ["279"] = true, ["264"] = true}
+
 local BAN_KEYWORDS = {
     "ban", "banned", "permanent", "suspended",
     "cấm", "khóa", "vĩnh viễn",
@@ -17,9 +24,17 @@ local BAN_KEYWORDS = {
     "dilarang", "permanen"
 }
 
+local REJOIN_KEYWORDS = {
+    "kick", "kicked", "disconnected",
+    "lost connection", "connection lost",
+    "bị kick", "mất kết nối"
+}
+
 local function matchAny(str, list)
     for _, kw in ipairs(list) do
-        if str:find(kw, 1, true) then return true end
+        if str:find(kw, 1, true) then
+            return true
+        end
     end
     return false
 end
@@ -38,10 +53,28 @@ local function UltimateKeyboardClick(btn)
     end)
 end
 
+local function WriteState(state)
+    if hasWrittenError then return end
+    local player = Players.LocalPlayer
+    if player then
+        pcall(function()
+            writefile(
+                string.format("%sError.json", player.Name),
+                HttpService:JSONEncode({ State = state })
+            )
+        end)
+        hasWrittenError = true
+    end
+end
+
 local function HandleErrorPrompt()
     local promptOverlay = coreGui:FindFirstChild("RobloxPromptGui")
-    if promptOverlay then promptOverlay = promptOverlay:FindFirstChild("promptOverlay") end
-    if not promptOverlay or not promptOverlay:FindFirstChild("ErrorPrompt") then return false end
+    if promptOverlay then
+        promptOverlay = promptOverlay:FindFirstChild("promptOverlay")
+    end
+    if not promptOverlay or not promptOverlay:FindFirstChild("ErrorPrompt") then
+        return false
+    end
 
     local errPrompt = promptOverlay.ErrorPrompt
     local fullText = ""
@@ -52,29 +85,35 @@ local function HandleErrorPrompt()
         if desc:IsA("TextLabel") and desc.Visible and desc.Text then
             fullText = fullText .. " " .. desc.Text:lower()
         end
+
         if desc:IsA("GuiButton") and desc.Visible then
             local nameStr = desc.Name:lower()
             local textStr = ""
+
             if desc:IsA("TextButton") then
                 textStr = desc.Text:lower()
             else
                 local lbl = desc:FindFirstChildWhichIsA("TextLabel")
-                if lbl then textStr = lbl.Text:lower() end
+                if lbl then
+                    textStr = lbl.Text:lower()
+                end
             end
 
             if matchAny(nameStr, RECONNECT_KW) or matchAny(textStr, RECONNECT_KW) then
                 reconnectBtnObj = desc
             end
+
             if matchAny(nameStr, LEAVE_KW) or matchAny(textStr, LEAVE_KW) then
                 leaveBtnObj = desc
             end
         end
     end
 
-    local codeNum = fullText:match("error code: (%d+)")
-                 or fullText:match("code: (%d+)")
-                 or fullText:match("fehlercode: (%d+)")
-                 or fullText:match("%((%d+)%)")
+    local codeNum =
+        fullText:match("error code: (%d+)")
+        or fullText:match("code: (%d+)")
+        or fullText:match("fehlercode: (%d+)")
+        or fullText:match("%((%d+)%)")
 
     local errorState = nil
 
@@ -82,28 +121,40 @@ local function HandleErrorPrompt()
         errorState = "banned"
     elseif matchAny(fullText, BAN_KEYWORDS) then
         errorState = "banned"
+    elseif codeNum and REJOIN_CODES[codeNum] then
+        errorState = "rejoin"
+    elseif matchAny(fullText, REJOIN_KEYWORDS) then
+        errorState = "rejoin"
     end
 
-    if errorState then
-        if not hasWrittenError then
-            local player = Players.LocalPlayer
-            if player then
-                pcall(function()
-                    writefile(
-                        string.format("%sError.json", player.Name),
-                        HttpService:JSONEncode({ State = errorState })
-                    )
-                end)
-                hasWrittenError = true
+    if errorState == "banned" then
+        WriteState("banned")
+        return true
+    end
+
+    if errorState == "rejoin" then
+        WriteState("rejoin")
+
+        if rejoinAttempts < MAX_REJOIN_ATTEMPTS then
+            rejoinAttempts = rejoinAttempts + 1
+            task.wait(math.random(2,5))
+            if reconnectBtnObj then
+                UltimateKeyboardClick(reconnectBtnObj)
+                return true
+            end
+        else
+            if leaveBtnObj then
+                UltimateKeyboardClick(leaveBtnObj)
+                return true
             end
         end
-        return true
     end
 
     if reconnectBtnObj then
         UltimateKeyboardClick(reconnectBtnObj)
         return true
     end
+
     if leaveBtnObj then
         UltimateKeyboardClick(leaveBtnObj)
         return true
@@ -121,7 +172,9 @@ end)
 
 task.spawn(function()
     pcall(function()
-        local promptOverlay = coreGui:WaitForChild("RobloxPromptGui", 10):WaitForChild("promptOverlay", 10)
+        local promptOverlay = coreGui:WaitForChild("RobloxPromptGui", 10)
+            :WaitForChild("promptOverlay", 10)
+
         if promptOverlay then
             promptOverlay.ChildAdded:Connect(function(child)
                 if child.Name == "ErrorPrompt" then
