@@ -11,7 +11,7 @@ local LEAVE_KW = {"leave", "verlassen", "sair", "salir", "quitter", "выйти"
 
 local BAN_CODES = {["148"] = true, ["6"] = true}
 
-local REJOIN_CODES = {["267"] = true, ["279"] = true, ["264"] = true}
+local REJOIN_CODES = {["267"] = true, ["278"] = true, ["279"] = true, ["264"] = true}
 
 local BAN_KEYWORDS = {
     "ban", "banned", "permanent", "suspended",
